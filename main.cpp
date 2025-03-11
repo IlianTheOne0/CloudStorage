@@ -1,4 +1,5 @@
 #include "Libs/mainConfig.h"
+#include "Tests/testHandler.h"
 
 int main()
 {
@@ -6,11 +7,12 @@ int main()
 	if (!config.load()) { cerr << "Error: Cannot load the config" << endl; return 1; }
 	
 	Logger::setLoggerState(config.get("isLogger") == "true");
+	TestHandler::setTestCounter(stoi(config.get("testCounter")));
 
-	INFO("Start of the program");
+	WARNING("Start of the program");
 
+	TestHandler::startTheTest();
 
-
-	INFO("End of the program");
+	WARNING("End of the program");
 	return 0;
 }
