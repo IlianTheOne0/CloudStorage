@@ -127,20 +127,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Libs\cfg.cpp" />
-    <ClCompile Include="Core\Logger\logger.cpp" />
+    <ClCompile Include="Core\Data\ConfigParser\configParser.cpp" />
     <ClCompile Include="Logger\logger.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\core.h" />
+    <ClInclude Include="Core\Data\ConfigParser\configParser.h" />
     <ClInclude Include="Core\Data\data.h" />
     <ClInclude Include="Core\Domain\domain.h" />
     <ClInclude Include="Core\Libs\cfg.h" />
-    <ClInclude Include="Core\core.h" />
     <ClInclude Include="Core\Logger\logger.h" />
     <ClInclude Include="Core\Presentation\presentation.h" />
+    <ClInclude Include="Libs\consoleColorsEnum.h" />
+    <ClInclude Include="Libs\dataConfig.h" />
+    <ClInclude Include="Libs\LoggerConfig\loggerConfig.h" />
+    <ClInclude Include="Libs\LoggerConfig\loggerTypesEnum.h" />
+    <ClInclude Include="Libs\mainConfig.h" />
     <ClInclude Include="Logger\logger.h" />
     <ClInclude Include="Tests\testHandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\config.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

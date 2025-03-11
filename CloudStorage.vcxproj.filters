@@ -15,16 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Libs\cfg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Logger\logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Logger\logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Data\ConfigParser\configParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +29,25 @@
     <ClInclude Include="Core\Libs\cfg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\core.h">
+    <ClInclude Include="Core\Logger\logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Logger\logger.h">
+    <ClInclude Include="Logger\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\testHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\LoggerConfig\loggerConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\consoleColorsEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\LoggerConfig\loggerTypesEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\mainConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Data\data.h">
@@ -47,11 +59,17 @@
     <ClInclude Include="Core\Presentation\presentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Logger\logger.h">
+    <ClInclude Include="Core\core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\testHandler.h">
+    <ClInclude Include="Libs\dataConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Data\ConfigParser\configParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\config.ini" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 #include "logger.h"
 
-void Logger::log(string message, LoggerTypes loggerType, Colors color)
+bool Logger::_isEnabled = false;
+
+void Logger::log(string message, LoggerTypes loggerType, ConsoleColors color)
 {
     if (_isEnabled)
     {
@@ -22,3 +24,4 @@ void Logger::log(string message, LoggerTypes loggerType, Colors color)
 }
 
 bool Logger::getLoggerState() { return _isEnabled; }
+void Logger::setLoggerState(const bool& state) { _isEnabled = state; }
