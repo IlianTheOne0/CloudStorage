@@ -1,6 +1,6 @@
 #include "../testHandler.h"
 
-#include "../../Libs/testConfig.h"
+#include "../../Utils/testConfig.h"
 #include "../../Core/core.h"
 
 class TempEntity

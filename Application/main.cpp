@@ -1,5 +1,5 @@
-#include "Libs/mainConfig.h"
-#include "Tests/testHandler.h"
+#include "../Utils/mainConfig.h"
+#include "../Tests/testHandler.h"
 
 int main()
 {

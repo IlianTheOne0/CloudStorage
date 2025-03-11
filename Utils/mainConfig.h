@@ -13,6 +13,6 @@ using std::cerr;
 #define LOG_DEFAULT(message) Logger::log(message, DefaultLogger)
 #define LOG_OWN(message, color) Logger::log(message, Own, color)
 
-#define CONFIG_PATH "Libs/config.ini"
+#define CONFIG_PATH "Infrastructure/Config/config.ini"
 
 #endif

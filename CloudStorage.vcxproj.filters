@@ -15,16 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Logger\logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Application\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Data\ConfigParser\configParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Libs\domainConfig.h">
+    <ClCompile Include="Logger\logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tests\Tests\wrapperTest.cpp">
@@ -41,22 +38,10 @@
     <ClInclude Include="Core\Logger\logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Logger\logger.h">
+    <ClInclude Include="Core\Data\data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Libs\LoggerConfig\loggerConfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\consoleColorsEnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\LoggerConfig\loggerTypesEnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\mainConfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\dataConfig.h">
+    <ClInclude Include="Core\Presentation\presentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Data\ConfigParser\configParser.h">
@@ -65,26 +50,41 @@
     <ClInclude Include="Core\Domain\Entites\Wrapper\wrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\testHandler.h">
+    <ClInclude Include="Core\Domain\domain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Data\data.h">
+    <ClInclude Include="Logger\logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Domain\domain.h">
+    <ClInclude Include="Tests\testHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Presentation\presentation.h">
+    <ClInclude Include="Utils\LoggerConfig\loggerConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Libs\testConfig.h">
+    <ClInclude Include="Utils\LoggerConfig\loggerTypesEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\consoleColorsEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\dataConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\domainConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\mainConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\testConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\config.ini" />
+    <None Include="Infrastructure\Config\config.ini" />
   </ItemGroup>
 </Project>
