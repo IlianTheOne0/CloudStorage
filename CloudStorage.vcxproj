@@ -129,20 +129,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application\main.cpp" />
-    <ClCompile Include="Core\Data\ConfigParser\configParser.cpp" />
+    <ClCompile Include="Core\Data\Parsers\ConfigParser\configParser.cpp" />
     <ClCompile Include="Logger\logger.cpp" />
     <ClCompile Include="Tests\testHandler.cpp" />
     <ClCompile Include="Tests\Tests\wrapperTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\core.h" />
-    <ClInclude Include="Core\Data\ConfigParser\configParser.h" />
+    <ClInclude Include="Core\Data\Parsers\ConfigParser\configParser.h" />
     <ClInclude Include="Core\Data\data.h" />
+    <ClInclude Include="Core\Data\Parsers\parsers.h" />
     <ClInclude Include="Core\Domain\domain.h" />
+    <ClInclude Include="Core\Domain\Entites\entites.h" />
     <ClInclude Include="Core\Domain\Entites\Wrapper\wrapper.h" />
     <ClInclude Include="Core\Libs\cfg.h" />
     <ClInclude Include="Core\Logger\logger.h" />
     <ClInclude Include="Core\Presentation\presentation.h" />
+    <ClInclude Include="Infrastructure\Config\consoleColorsEnum.h" />
+    <ClInclude Include="Infrastructure\Config\dataConfig.h" />
+    <ClInclude Include="Infrastructure\Config\domainConfig.h" />
+    <ClInclude Include="Infrastructure\Config\LoggerConfig\loggerConfig.h" />
+    <ClInclude Include="Infrastructure\Config\LoggerConfig\loggerTypesEnum.h" />
+    <ClInclude Include="Infrastructure\Config\mainConfig.h" />
+    <ClInclude Include="Infrastructure\Config\testConfig.h" />
     <ClInclude Include="Logger\logger.h" />
     <ClInclude Include="Tests\testHandler.h" />
     <ClInclude Include="Utils\consoleColorsEnum.h" />

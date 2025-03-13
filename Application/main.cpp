@@ -1,4 +1,4 @@
-#include "../Utils/mainConfig.h"
+#include "../Infrastructure/Config/mainConfig.h"
 #include "../Tests/testHandler.h"
 
 int main()

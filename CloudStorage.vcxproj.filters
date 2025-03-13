@@ -18,7 +18,7 @@
     <ClCompile Include="Application\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Data\ConfigParser\configParser.cpp">
+    <ClCompile Include="Core\Data\Parsers\ConfigParser\configParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger\logger.cpp">
@@ -38,16 +38,10 @@
     <ClInclude Include="Core\Logger\logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Data\data.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Presentation\presentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Data\ConfigParser\configParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Domain\Entites\Wrapper\wrapper.h">
+    <ClInclude Include="Core\Data\Parsers\ConfigParser\configParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Domain\domain.h">
@@ -81,6 +75,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils\testConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Data\data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Data\Parsers\parsers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\Entites\Wrapper\wrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\Entites\entites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infrastructure\Config\consoleColorsEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infrastructure\Config\dataConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infrastructure\Config\domainConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infrastructure\Config\mainConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infrastructure\Config\testConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infrastructure\Config\LoggerConfig\loggerConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infrastructure\Config\LoggerConfig\loggerTypesEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

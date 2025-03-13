@@ -1,13 +1,13 @@
 #include "../testHandler.h"
 
-#include "../../Utils/testConfig.h"
+#include "../../Infrastructure/Config/testConfig.h"
 #include "../../Core/core.h"
 
-class TempEntity
+class Entity
 {
 public:
-	TempEntity() = default;
-	~TempEntity() = default;
+	Entity() = default;
+	~Entity() = default;
 
 	string helloMessage() { return "Hello world!"; }
 	long long add(long long a, long long b) { return a + b; }
@@ -15,8 +15,8 @@ public:
 
 void TestHandler::wrapperTest()
 {
-	Wrapper<TempEntity> obj;
+	Wrapper<Entity> obj;
 
-	cout << obj->helloMessage() << endl;
-	cout << obj->add(10, 15) << endl;
+	cout << obj.call()(&Entity::helloMessage, "helloMessage") << endl;
+	cout << obj.call()(&Entity::add, "add", 10, 5) << endl;
 }

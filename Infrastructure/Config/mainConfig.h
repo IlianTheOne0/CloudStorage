@@ -1,8 +1,8 @@
 #ifndef MAIN_CONFIG_H
 #define MAIN_CONFIG_H
 
-#include "../Logger/logger.h"
-#include "../Core/Data/ConfigParser/configParser.h"
+#include "../../Logger/logger.h"
+#include "../../Core/Data/Parsers/ConfigParser/configParser.h"
 
 using std::cerr;
 

@@ -1,7 +1,7 @@
 #ifndef CONFIG_PARSER_H
 #define CONFIG_PARSER_H
 
-#include "../../../Utils/dataConfig.h"
+#include "../../../../Infrastructure/Config/dataConfig.h"
 
 class ConfigParser
 {
