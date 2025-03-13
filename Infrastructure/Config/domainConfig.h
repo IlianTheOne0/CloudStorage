@@ -6,14 +6,16 @@
 #include <memory>
 #include <string>
 #include <ctime>
-#include <sstream>
 #include <vector>
+#include <list>
 
 using std::shared_ptr;
 using std::forward;
 using std::string;
-using std::istream;
+using std::time_t;
+using std::map;
 using std::vector;
-using std::ostringstream;
+using std::find;
+using std::list;
 
 #endif

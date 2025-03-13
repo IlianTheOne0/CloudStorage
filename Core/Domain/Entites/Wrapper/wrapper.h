@@ -9,15 +9,15 @@ class Wrapper
 private:
 	shared_ptr<TValue> _obj;
 
-	class Proxy
+	class WrapperPtr
 	{
 	private:
 		TValue* _ptr;
 	public:
-		Proxy(TValue* ptr)
+		WrapperPtr(TValue* ptr)
 			: _ptr(ptr)
 		{ }
-		Proxy() = delete;
+		WrapperPtr() = delete;
 
 		template<typename TMethod, typename... TArgs>
 		auto operator()(TMethod method, const string& methodName, TArgs&&... args)
@@ -32,7 +32,7 @@ public:
 	{ CREATE_INFO(string(typeid(TValue).name()) + " <- constructor: called;"); }
 	~Wrapper() { CREATE_INFO(string(typeid(TValue).name()) + " <- destructor: called;"); }
 
-	Proxy call() { return Proxy(_obj.get()); }
+	WrapperPtr call() { return WrapperPtr(_obj.get()); }
 };
 
 #endif

@@ -30,6 +30,30 @@
     <ClCompile Include="Tests\testHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Domain\Entites\Unit\unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Domain\UseCases\UnitUseCase\unitUseCase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Domain\Entites\Directory\directory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Domain\UseCases\DirectoryUseCase\directoryUseCase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Domain\Entites\Files\Abstraction\AFiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Domain\UseCases\FilesUseCases\Abstraction\AFilesUseCase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Domain\UseCases\FilesUseCases\Implemention\TextFile\textFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Tests\directoriesTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Libs\cfg.h">
@@ -108,6 +132,45 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Infrastructure\Config\LoggerConfig\loggerTypesEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\Entites\Unit\unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\useCases.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\UnitUseCase\unitUseCase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\Entites\Directory\directory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\DirectoryUseCase\directoryUseCase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\Entites\Files\fileTypesEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\Entites\Files\Interface\IFiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\Entites\Files\Abstraction\AFiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\FilesUseCases\Abstraction\AFilesUseCase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\FilesUseCases\Interface\IFilesUseCase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\FilesUseCases\fileTypesEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\FilesUseCases\Implemention\TextFile\textFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Domain\UseCases\FilesUseCases\Implemention\filesImplemention.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
