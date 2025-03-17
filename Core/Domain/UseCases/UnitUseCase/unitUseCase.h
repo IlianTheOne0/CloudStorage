@@ -3,13 +3,12 @@
 
 #include "../../../../Infrastructure/Config/domainConfig.h"
 
-#include "../../Entites/entites.h"
+#include "../../Entites/Unit/unit.h"
 
 class UnitUseCase
 {
 private:
-	Unit* _data = nullptr;
-protected:
+	Unit* _unit = nullptr;
 	virtual void updateLastEdited();
 public:
 	UnitUseCase() = delete;
@@ -20,6 +19,9 @@ public:
 	virtual void setHidden(const bool& value);
 
 	virtual map<string, string> getInfo() const;
+	Unit* getUnit() const;
+
+	Unit* operator->() { updateLastEdited(); return _unit; }
 };
 
 #endif

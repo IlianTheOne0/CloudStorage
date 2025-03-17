@@ -3,20 +3,17 @@
 
 #include "../../../../Infrastructure/Config/domainConfig.h"
 
-#include "../../UseCases/useCases.h"
+#include "../../UseCases/UnitUseCase/unitUseCase.h"
 
 class Directory
-	: public UnitUseCase
+    : public UnitUseCase
 {
-private:
-	vector<UnitUseCase*> _data;
 public:
-	Directory() = delete;
-	Directory(const string& name, const bool& isHidden);
-	~Directory() override = default;
+    vector<UnitUseCase*> _vObjects;
 
-	vector<UnitUseCase*> getData();
-	void operator->() { updateLastEdited; }
+    Directory() = delete;
+    Directory(const string& name, const bool& isHidden);
+    ~Directory() override = default;
 };
 
 #endif
