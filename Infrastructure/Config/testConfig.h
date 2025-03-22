@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <exception>
 
 using std::cout;
 using std::endl;
@@ -14,5 +15,6 @@ using std::vector;
 using std::random_device;
 using std::mt19937;
 using std::uniform_int_distribution;
+using std::exception;
 
 #endif

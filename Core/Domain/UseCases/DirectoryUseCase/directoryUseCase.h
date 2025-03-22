@@ -7,21 +7,13 @@
 
 class DirectoryUseCase
 {
-private:
-	Directory* _directory = nullptr;
-	static size_t _maxSize;
 public:
-	DirectoryUseCase() = delete;
-	DirectoryUseCase(const string& name, const bool& isHidden = false);
-	virtual ~DirectoryUseCase();
+    static void add(shared_ptr<Directory>& directory, const shared_ptr<Unit>& unit);
+    static void add(shared_ptr<Directory>& directory, const string& name, const FileTypes& fileType, const bool& isHidden = false);
 
-	virtual void add(UnitUseCase* item);
-	virtual void remove(UnitUseCase* item);
+    static void remove(shared_ptr<Directory>& directory, const string& name);
 
-	virtual void add(const string& name);
-	virtual void remove(const string& name);
-
-	virtual map<string, string> getInfo() const;
+    static bool switchToDirectory(shared_ptr<Directory>& directory, const string& name);
 };
 
 #endif

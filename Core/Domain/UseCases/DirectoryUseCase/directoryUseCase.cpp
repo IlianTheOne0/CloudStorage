@@ -1,65 +1,46 @@
 #include "directoryUseCase.h"
 
-DirectoryUseCase::DirectoryUseCase(const string& name, const bool& isHidden)
-    : _directory(new Directory(name, isHidden))
+void DirectoryUseCase::add(shared_ptr<Directory>& directory, const string& name, const FileTypes& fileType, const bool& isHidden)
 {
-    ConfigParser config(CONFIG_PATH);
-    if (!config.load()) { cerr << "Error: Cannot load the config" << endl; return; }
-    _maxSize = stoi(config.get("directoryMaxSize"));
-}
-DirectoryUseCase::~DirectoryUseCase() { if (_directory) { delete _directory; } }
+    if (!directory) { throw invalid_argument("Directory pointer is null!"); }
 
-void DirectoryUseCase::add(UnitUseCase* item)
-{
-    if (_directory->_vObjects.size() >= _maxSize) { cerr << "Error: Cannot add item. Directory has reached its maximum size." << endl; return; }
-    _directory->_vObjects.push_back(item);
-}
-void DirectoryUseCase::remove(UnitUseCase* item)
-{
-    vector<UnitUseCase*>& objects = _directory->_vObjects;
-
-    vector<UnitUseCase*>::iterator iterator = find(objects.begin(), objects.end(), item);
-    if (iterator != objects.end()) { objects.erase(iterator); }
-}
-
-void DirectoryUseCase::add(const string& name)
-{
-    if (_directory->_vObjects.size() >= _maxSize) { cerr << "Error: Cannot add item. Directory has reached its maximum size." << endl; return; }
-
-    UnitUseCase* newItem = new UnitUseCase(name);
-    add(newItem);
-}
-void DirectoryUseCase::remove(const string& name)
-{
-    vector<UnitUseCase*>& objects = _directory->_vObjects;
-
-    vector<UnitUseCase*>::iterator iterator = find_if(objects.begin(), objects.end(), [&name](UnitUseCase* item) { return item->getUnit()->getName() == name; });
-    if (iterator != objects.end()) { remove(*iterator); }
-}
-
-map<string, string> DirectoryUseCase::getInfo() const
-{
-    ConfigParser config(CONFIG_PATH);
-    if (!config.load()) { cerr << "Error: Cannot load the config" << endl; return map<string, string>(); }
-    size_t maxSize = stoi(config.get("directoryMaxSize"));
-
-    map<string, string> info;
-
-    info["name"] = _directory->getUnit()->getName();
-    info["isHidden"] = _directory->getUnit()->getIsHidden() ? "true" : "false";
-
-    int numDigits = to_string(maxSize).length();
-    
-    const vector<UnitUseCase*> objects = _directory->_vObjects;
-
-    for (size_t i = 0; i < objects.size(); ++i) {
-        map<string, string> objectInfo = objects[i]->getInfo();
-
-        ostringstream formattedName;
-        formattedName << "directory" << setw(numDigits) << setfill('0') << i;
-
-        for (const pair<const string, string>& entry : objectInfo) { info[formattedName.str() + "_" + entry.first] = entry.second; }
+    switch (fileType)
+    {
+    case FileTypes::DirectoryType: { directory->getContents().push_back(make_shared<Directory>(name, isHidden)); } break;
+    default: { directory->getContents().push_back(make_shared<Unit>(name, isHidden, fileType)); }
     }
+}
+void DirectoryUseCase::add(shared_ptr<Directory>& directory, const shared_ptr<Unit>& unit)
+{
+    if (!directory) { throw invalid_argument("Directory pointer is null!"); }
+    if (!unit) { throw invalid_argument("Unit pointer is null!"); }
 
-    return info;
+    directory->getContents().push_back(unit);
+}
+
+void DirectoryUseCase::remove(shared_ptr<Directory>& directory, const string& name)
+{
+    if (!directory) { throw invalid_argument("Directory pointer is null!"); }
+
+    vector<shared_ptr<Unit>>::iterator it = remove_if(directory->getContents().begin(), directory->getContents().end(),
+        [&name](const shared_ptr<Unit>& unit) { return unit->getName() == name; });
+
+    if (it == directory->getContents().end()) { throw runtime_error("Unit with the specified name not found!"); }
+    directory->getContents().erase(it, directory->getContents().end());
+}
+
+bool DirectoryUseCase::switchToDirectory(shared_ptr<Directory>& directory, const string& name)
+{
+    if (!directory) { throw invalid_argument("Directory pointer is null!"); }
+
+    for (const shared_ptr<Unit>& unit : directory->getContents())
+    {
+        if (unit->getFileType() == FileTypes::DirectoryType && unit->getName() == name)
+        {
+            shared_ptr<Directory> newDirectory = dynamic_pointer_cast<Directory>(unit);
+            if (newDirectory) { directory = newDirectory; return true; }
+            else { throw runtime_error("Failed to cast Unit to Directory!"); }
+        }
+    }
+    return false;
 }

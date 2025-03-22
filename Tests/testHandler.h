@@ -9,6 +9,8 @@ private:
     static void wrapperTest();
     static void unitTest();
     static void directoryTest();
+    static void fileTest();
+    //static void totalTestOfAllUnits();
 public:
     static void setTestCounter(const unsigned short& value) { _testCounter = value; }
     static void startTheTest()
@@ -18,6 +20,8 @@ public:
             case 0: { wrapperTest(); } break;
             case 1: { unitTest(); } break;
             case 2: { directoryTest(); } break;
+            case 3: { fileTest(); } break;
+            //case 4: { totalTestOfAllUnits(); } break;
             default: {}
         }
     }

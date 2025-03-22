@@ -2,7 +2,7 @@
 #define MAIN_CONFIG_H
 
 #include "../../Logger/logger.h"
-#include "../../Core/Data/Parsers/ConfigParser/configParser.h"
+#include "../../Services/Parsers/parsers.h"
 
 using std::cerr;
 

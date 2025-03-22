@@ -3,17 +3,19 @@
 
 #include "../../../../Infrastructure/Config/domainConfig.h"
 
-#include "../../UseCases/UnitUseCase/unitUseCase.h"
+#include "../Unit/unit.h"
 
 class Directory
-    : public UnitUseCase
+    : public Unit
 {
+private:
+    vector<shared_ptr<Unit>> _contents;
 public:
-    vector<UnitUseCase*> _vObjects;
-
     Directory() = delete;
     Directory(const string& name, const bool& isHidden);
     ~Directory() override = default;
+
+    vector<shared_ptr<Unit>>& getContents();
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 void testConstructor()
 {
-    Unit unit("TestUnit", true);
+    Unit unit("TestUnit", true, FileTypes::DirectoryType);
 
     if (unit.getName() == "TestUnit" && unit.getIsHidden() == true) { cout << "Constructor test: Succeeded" << endl; }
     else { cout << "Constructor test: Failed" << endl; }
@@ -13,7 +13,7 @@ void testConstructor()
 
 void testGetName()
 {
-    Unit unit("TestUnit", true);
+    Unit unit("TestUnit", true, FileTypes::DirectoryType);
 
     if (unit.getName() == "TestUnit") { cout << "getName test: Succeeded" << endl; }
     else { cout << "getName test: Failed" << endl; }
@@ -21,7 +21,7 @@ void testGetName()
 
 void testGetIsHidden()
 {
-    Unit unit("TestUnit", true);
+    Unit unit("TestUnit", true, FileTypes::DirectoryType);
 
     if (unit.getIsHidden() == true) { cout << "getIsHidden test: Succeeded" << endl; }
     else { cout << "getIsHidden test: Failed" << endl; }
@@ -29,7 +29,7 @@ void testGetIsHidden()
 
 void testSetName()
 {
-    Unit unit("TestUnit", true);
+    Unit unit("TestUnit", true, FileTypes::DirectoryType);
 
     unit.setName("NewName");
     
@@ -39,7 +39,7 @@ void testSetName()
 
 void testSetIsHidden()
 {
-    Unit unit("TestUnit", true);
+    Unit unit("TestUnit", true, FileTypes::DirectoryType);
 
     unit.setIsHidden(false);
     
@@ -49,7 +49,7 @@ void testSetIsHidden()
 
 void testSetCreatedDate()
 {
-    Unit unit("TestUnit", true);
+    Unit unit("TestUnit", true, FileTypes::DirectoryType);
 
     time_t now = time(0);
     unit.setCreatedDate(now);
@@ -60,7 +60,7 @@ void testSetCreatedDate()
 
 void testSetLastEditedDate()
 {
-    Unit unit("TestUnit", true);
+    Unit unit("TestUnit", true, FileTypes::DirectoryType);
 
     time_t now = time(0);
     time_t later = now + 1000;
