@@ -1,7 +1,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "../Infrastructure/Config/LoggerConfig/loggerConfig.h"
+#include "../../Infrastructure/Config/LoggerConfig/loggerConfig.h"
 
 class Logger
 {

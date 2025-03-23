@@ -9,13 +9,13 @@ void testConstructorAndGetContent()
     string content = "This is a test content.";
     bool isHidden = false;
 
-    AFile* textFile = new TextFile(name, content, isHidden);
+    Wrapper<TextFile> textFile(name, content, isHidden);
 
-    cout << "Name: " << textFile->getName() << endl;
-    cout << "Content: " << textFile->getContent() << endl;
-    cout << "Is Hidden: " << textFile->getIsHidden() << endl;
+    cout << "Name: " << textFile.call()(&TextFile::getName, "getName") << endl;
+    cout << "Content: " << textFile.call()(&TextFile::getContent, "getContent") << endl;
+    cout << "Is Hidden: " << textFile.call()(&TextFile::getIsHidden, "getIsHidden") << endl;
 
-    if (textFile->getName() == name && textFile->getContent() == content && textFile->getIsHidden() == isHidden) { cout << "Test case 1 passed: Constructor and getContent" << endl; }
+    if (textFile.call()(&TextFile::getName, "getName") == name && textFile.call()(&TextFile::getContent, "getContent") == content && textFile.call()(&TextFile::getIsHidden, "getIsHidden") == isHidden) { cout << "Test case 1 passed: Constructor and getContent" << endl; }
     else { cout << "Test case 1 failed: Constructor and getContent" << endl; }
 }
 
@@ -26,14 +26,14 @@ void testEditContentAndGetContent()
     string newContent = "Updated content.";
     bool isHidden = false;
 
-    TextFile textFile(name, initialContent, isHidden);
-    textFile.editContent(newContent);
+    Wrapper<TextFile> textFile(name, initialContent, isHidden);
+    textFile.call()(&TextFile::editContent, "editContent", newContent);
 
-    cout << "Name: " << textFile.getName() << endl;
-    cout << "Content: " << textFile.getContent() << endl;
-    cout << "Is Hidden: " << textFile.getIsHidden() << endl;
+    cout << "Name: " << textFile.call()(&TextFile::getName, "getName") << endl;
+    cout << "Content: " << textFile.call()(&TextFile::getContent, "getContent") << endl;
+    cout << "Is Hidden: " << textFile.call()(&TextFile::getIsHidden, "getIsHidden") << endl;
 
-    if (textFile.getContent() == newContent) { cout << "Test case 2 passed: editContent and getContent" << endl; }
+    if (textFile.call()(&TextFile::getContent, "getContent") == newContent) { cout << "Test case 2 passed: editContent and getContent" << endl; }
     else { cout << "Test case 2 failed: editContent and getContent" << endl; }
 }
 

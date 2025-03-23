@@ -1,7 +1,7 @@
 #ifndef PROVIDERS_INTERFACE_H
 #define PROVIDERS_INTERFACE_H
 
-#include "../../../../Utils/dataConfig.h"
+#include "../../../../Infrastructure/Config/dataConfig.h"
 
 class IProviders
 {

@@ -135,7 +135,7 @@
     <ClCompile Include="Core\Domain\UseCases\DirectoryUseCase\directoryUseCase.cpp" />
     <ClCompile Include="Core\Domain\Entites\File\Abstraction\AFile.cpp" />
     <ClCompile Include="Core\Domain\UseCases\TextFileUseCase\textFileUseCase.cpp" />
-    <ClCompile Include="Logger\logger.cpp" />
+    <ClCompile Include="Services\Logger\logger.cpp" />
     <ClCompile Include="Tests\testHandler.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\directoryTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\fileTest.cpp" />
@@ -147,14 +147,14 @@
     <ClInclude Include="Core\Domain\Entites\File\file.h" />
     <ClInclude Include="Infrastructure\Config\servicesConfig.h" />
     <ClInclude Include="Services\Parsers\ConfigParser\configParser.h" />
-    <ClInclude Include="Core\Data\data.h" />
     <ClInclude Include="Services\Parsers\parsers.h" />
     <ClInclude Include="Core\Domain\domain.h" />
     <ClInclude Include="Core\Domain\Entites\Directory\directory.h" />
     <ClInclude Include="Core\Domain\Entites\entites.h" />
     <ClInclude Include="Core\Domain\Entites\Unit\unitTypesEnum.h" />
     <ClInclude Include="Core\Domain\Entites\Unit\unit.h" />
-    <ClInclude Include="Core\Domain\Entites\Wrapper\wrapper.h" />
+    <ClInclude Include="Services\services.h" />
+    <ClInclude Include="Services\Wrapper\wrapper.h" />
     <ClInclude Include="Core\Domain\UseCases\DirectoryUseCase\directoryUseCase.h" />
     <ClInclude Include="Core\Domain\Entites\File\Abstraction\AFile.h" />
     <ClInclude Include="Core\Domain\Entites\File\Interface\IFile.h" />
@@ -170,7 +170,7 @@
     <ClInclude Include="Infrastructure\Config\LoggerConfig\loggerTypesEnum.h" />
     <ClInclude Include="Infrastructure\Config\mainConfig.h" />
     <ClInclude Include="Infrastructure\Config\testConfig.h" />
-    <ClInclude Include="Logger\logger.h" />
+    <ClInclude Include="Services\Logger\logger.h" />
     <ClInclude Include="Tests\testHandler.h" />
   </ItemGroup>
   <ItemGroup>

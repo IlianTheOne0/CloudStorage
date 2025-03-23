@@ -1,8 +1,7 @@
 #ifndef MAIN_CONFIG_H
 #define MAIN_CONFIG_H
 
-#include "../../Logger/logger.h"
-#include "../../Services/Parsers/parsers.h"
+#include "../../Services/services.h"
 
 using std::cerr;
 

@@ -8,8 +8,8 @@
 class DirectoryUseCase
 {
 public:
-    static void add(shared_ptr<Directory>& directory, const shared_ptr<Unit>& unit);
-    static void add(shared_ptr<Directory>& directory, const string& name, const FileTypes& fileType, const bool& isHidden = false);
+    static void addByParams(shared_ptr<Directory>& directory, const string& name, const FileTypes& fileType, const bool& isHidden = false);
+    static void addByUnit(shared_ptr<Directory>& directory, const shared_ptr<Unit>& unit);
 
     static void remove(shared_ptr<Directory>& directory, const string& name);
 

@@ -12,7 +12,8 @@ using std::ifstream;
 using std::istringstream;
 using std::ofstream;
 using std::shared_ptr;
-
+using std::make_shared;
+using std::forward;
 
 #define DEFAULT_VALUE ""
 

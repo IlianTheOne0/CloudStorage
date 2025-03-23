@@ -10,12 +10,14 @@ class Directory
 {
 private:
     vector<shared_ptr<Unit>> _contents;
+    size_t _directoryMaxSize;
 public:
     Directory() = delete;
     Directory(const string& name, const bool& isHidden);
     ~Directory() override = default;
 
     vector<shared_ptr<Unit>>& getContents();
+    size_t getDirectoryMaxSize() const;
 };
 
 #endif
