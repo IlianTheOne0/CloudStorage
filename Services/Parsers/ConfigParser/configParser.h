@@ -3,7 +3,7 @@
 
 #include "../../../Infrastructure/Config/servicesConfig.h"
 
-class ConfigParser
+class ConfigParser final
 {
 private:
     string _path;

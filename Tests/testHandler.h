@@ -10,6 +10,7 @@ private:
     static void unitTest();
     static void directoryTest();
     static void fileTest();
+    static void providersTest();
     //static void totalTestOfAllUnits();
 public:
     static void setTestCounter(const unsigned short& value) { _testCounter = value; }
@@ -21,6 +22,7 @@ public:
             case 1: { unitTest(); } break;
             case 2: { directoryTest(); } break;
             case 3: { fileTest(); } break;
+            case 4: { providersTest(); } break;
             //case 4: { totalTestOfAllUnits(); } break;
             default: {}
         }

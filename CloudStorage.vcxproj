@@ -129,6 +129,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application\main.cpp" />
+    <ClCompile Include="Core\Data\Providers\Base\AProviders.cpp" />
+    <ClCompile Include="Core\Data\Providers\LocalProvider\localProvider.cpp" />
+    <ClCompile Include="Core\Data\Providers\RemoteProvider\remoteProvider.cpp" />
     <ClCompile Include="Services\Parsers\ConfigParser\configParser.cpp" />
     <ClCompile Include="Core\Domain\Entites\Directory\directory.cpp" />
     <ClCompile Include="Core\Domain\Entites\Unit\unit.cpp" />
@@ -136,7 +139,9 @@
     <ClCompile Include="Core\Domain\Entites\File\Abstraction\AFile.cpp" />
     <ClCompile Include="Core\Domain\UseCases\TextFileUseCase\textFileUseCase.cpp" />
     <ClCompile Include="Services\Logger\logger.cpp" />
+    <ClCompile Include="Services\Parsers\PathReceiver\pathReceiver.cpp" />
     <ClCompile Include="Tests\testHandler.cpp" />
+    <ClCompile Include="Tests\Tests\DataTests\providersTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\directoryTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\fileTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\unitTest.cpp" />
@@ -144,6 +149,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\core.h" />
+    <ClInclude Include="Core\Data\data.h" />
+    <ClInclude Include="Core\Data\Providers\Base\AProviders.h" />
+    <ClInclude Include="Core\Data\Providers\Base\IProviders.h" />
+    <ClInclude Include="Core\Data\Providers\LocalProvider\localProvider.h" />
+    <ClInclude Include="Core\Data\Providers\providers.h" />
+    <ClInclude Include="Core\Data\Providers\RemoteProvider\remoteProvider.h" />
     <ClInclude Include="Core\Domain\Entites\File\file.h" />
     <ClInclude Include="Infrastructure\Config\servicesConfig.h" />
     <ClInclude Include="Services\Parsers\ConfigParser\configParser.h" />
@@ -153,6 +164,7 @@
     <ClInclude Include="Core\Domain\Entites\entites.h" />
     <ClInclude Include="Core\Domain\Entites\Unit\unitTypesEnum.h" />
     <ClInclude Include="Core\Domain\Entites\Unit\unit.h" />
+    <ClInclude Include="Services\Parsers\PathReceiver\pathReceiver.h" />
     <ClInclude Include="Services\services.h" />
     <ClInclude Include="Services\Wrapper\wrapper.h" />
     <ClInclude Include="Core\Domain\UseCases\DirectoryUseCase\directoryUseCase.h" />
@@ -174,6 +186,8 @@
     <ClInclude Include="Tests\testHandler.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Core\Data\Sources\Local\local" />
+    <None Include="Core\Data\Sources\Remote\remote" />
     <None Include="Infrastructure\Config\config.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
