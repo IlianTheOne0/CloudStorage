@@ -132,6 +132,10 @@
     <ClCompile Include="Core\Data\Providers\Base\AProviders.cpp" />
     <ClCompile Include="Core\Data\Providers\LocalProvider\localProvider.cpp" />
     <ClCompile Include="Core\Data\Providers\RemoteProvider\remoteProvider.cpp" />
+    <ClCompile Include="Services\Encryption\Base\AEncryption.cpp" />
+    <ClCompile Include="Services\Encryption\Decryptor\decryptor.cpp" />
+    <ClCompile Include="Services\Encryption\EncryptionStruct\encryptionStruct.cpp" />
+    <ClCompile Include="Services\Encryption\Encryptor\encryptor.cpp" />
     <ClCompile Include="Services\Parsers\ConfigParser\configParser.cpp" />
     <ClCompile Include="Core\Domain\Entites\Directory\directory.cpp" />
     <ClCompile Include="Core\Domain\Entites\Unit\unit.cpp" />
@@ -141,7 +145,8 @@
     <ClCompile Include="Services\Logger\logger.cpp" />
     <ClCompile Include="Services\Parsers\PathReceiver\pathReceiver.cpp" />
     <ClCompile Include="Tests\testHandler.cpp" />
-    <ClCompile Include="Tests\Tests\DataTests\providersTest.cpp" />
+    <ClCompile Include="Tests\Tests\DataTests\encryptorTest.cpp" />
+    <ClCompile Include="Tests\Tests\DataTests\providerTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\directoryTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\fileTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\unitTest.cpp" />
@@ -155,8 +160,15 @@
     <ClInclude Include="Core\Data\Providers\LocalProvider\localProvider.h" />
     <ClInclude Include="Core\Data\Providers\providers.h" />
     <ClInclude Include="Core\Data\Providers\RemoteProvider\remoteProvider.h" />
+    <ClInclude Include="Core\Domain\Repositories\Repositories.h" />
     <ClInclude Include="Core\Domain\Entites\File\file.h" />
     <ClInclude Include="Infrastructure\Config\servicesConfig.h" />
+    <ClInclude Include="Services\Encryption\Base\AEncryption.h" />
+    <ClInclude Include="Services\Encryption\Base\IEncryption.h" />
+    <ClInclude Include="Services\Encryption\Decryptor\decryptor.h" />
+    <ClInclude Include="Services\Encryption\encryption.h" />
+    <ClInclude Include="Services\Encryption\EncryptionStruct\encryptionStruct.h" />
+    <ClInclude Include="Services\Encryption\Encryptor\encryptor.h" />
     <ClInclude Include="Services\Parsers\ConfigParser\configParser.h" />
     <ClInclude Include="Services\Parsers\parsers.h" />
     <ClInclude Include="Core\Domain\domain.h" />
@@ -165,6 +177,9 @@
     <ClInclude Include="Core\Domain\Entites\Unit\unitTypesEnum.h" />
     <ClInclude Include="Core\Domain\Entites\Unit\unit.h" />
     <ClInclude Include="Services\Parsers\PathReceiver\pathReceiver.h" />
+    <ClInclude Include="Services\Randomizers\ByteRandomizer\byteRandomizer.h" />
+    <ClInclude Include="Services\Randomizers\KeyRandomizer\keyRandomizer.h" />
+    <ClInclude Include="Services\Randomizers\randomizers.h" />
     <ClInclude Include="Services\services.h" />
     <ClInclude Include="Services\Wrapper\wrapper.h" />
     <ClInclude Include="Core\Domain\UseCases\DirectoryUseCase\directoryUseCase.h" />

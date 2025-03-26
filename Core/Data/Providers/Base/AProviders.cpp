@@ -1,6 +1,6 @@
 #include "AProviders.h"
 
-string AProviders::load_(const string& path)
+string AProviders::load_(const string& path) const
 {
     fstream file(path);
 

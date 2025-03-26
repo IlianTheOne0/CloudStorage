@@ -31,7 +31,6 @@ private:
             return (_ptr.get()->*method)(forward<TArgs>(args)...);
         }
     };
-
 public:
     template<typename... TArgs> Wrapper(TArgs&&... args)
         : _obj(make_shared<TValue>(forward<TArgs>(args)...))

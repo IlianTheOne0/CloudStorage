@@ -9,14 +9,14 @@ class AProviders abstract
 	: public IProviders
 {
 protected:
-	string load_(const string& path) override;
+	string load_(const string& path) const override;
 	bool save_(const string& path, const string& data) override;
 public:
 	AProviders() = default;
 	~AProviders() override = default;
 
+	virtual string load() const = 0;
 	virtual bool save(const string& data) = 0;
-	virtual string load() = 0;
 };
 
 #endif

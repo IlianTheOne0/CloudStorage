@@ -8,5 +8,5 @@ LocalProvider::LocalProvider()
 	_path = PathReceiver::globalPath() + config.get("localSave");
 }
 
+string LocalProvider::load() const { return load_(_path); }
 bool LocalProvider::save(const string& data) { return save_(_path, data); }
-string LocalProvider::load() { return load_(_path); }
