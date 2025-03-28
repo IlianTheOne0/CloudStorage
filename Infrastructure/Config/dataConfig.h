@@ -8,7 +8,6 @@
 #include <exception>
 #include <iostream>
 #include <filesystem>
-#include <memory>
 
 using std::fstream;
 using std::ofstream;
@@ -17,7 +16,6 @@ using std::runtime_error;
 using std::ios;
 using std::filesystem::canonical;
 using std::filesystem::exists;
-using std::unique_ptr;
-using std::make_unique;
+using std::istreambuf_iterator;
 
 #endif

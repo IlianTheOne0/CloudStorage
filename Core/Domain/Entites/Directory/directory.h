@@ -17,6 +17,7 @@ public:
     ~Directory() override = default;
 
     vector<shared_ptr<Unit>>& getContents();
+    const vector<shared_ptr<Unit>>& getContents() const;
     size_t getDirectoryMaxSize() const;
 };
 

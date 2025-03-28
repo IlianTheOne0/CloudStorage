@@ -132,6 +132,8 @@
     <ClCompile Include="Core\Data\Providers\Base\AProviders.cpp" />
     <ClCompile Include="Core\Data\Providers\LocalProvider\localProvider.cpp" />
     <ClCompile Include="Core\Data\Providers\RemoteProvider\remoteProvider.cpp" />
+    <ClCompile Include="Core\Domain\UseCases\SerializationUseCase\Serialization\serialization.cpp" />
+    <ClCompile Include="Core\Domain\UseCases\SerializationUseCase\ValueParser\valueParser.cpp" />
     <ClCompile Include="Services\Encryption\Base\AEncryption.cpp" />
     <ClCompile Include="Services\Encryption\Decryptor\decryptor.cpp" />
     <ClCompile Include="Services\Encryption\EncryptionStruct\encryptionStruct.cpp" />
@@ -147,6 +149,7 @@
     <ClCompile Include="Tests\testHandler.cpp" />
     <ClCompile Include="Tests\Tests\DataTests\encryptorTest.cpp" />
     <ClCompile Include="Tests\Tests\DataTests\providerTest.cpp" />
+    <ClCompile Include="Tests\Tests\DataTests\serializationTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\directoryTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\fileTest.cpp" />
     <ClCompile Include="Tests\Tests\UnitsTests\unitTest.cpp" />
@@ -156,12 +159,15 @@
     <ClInclude Include="Core\core.h" />
     <ClInclude Include="Core\Data\data.h" />
     <ClInclude Include="Core\Data\Providers\Base\AProviders.h" />
-    <ClInclude Include="Core\Data\Providers\Base\IProviders.h" />
+    <ClInclude Include="Core\Domain\Repositories\ProvidersRepository\providersRepository.h" />
     <ClInclude Include="Core\Data\Providers\LocalProvider\localProvider.h" />
     <ClInclude Include="Core\Data\Providers\providers.h" />
     <ClInclude Include="Core\Data\Providers\RemoteProvider\remoteProvider.h" />
-    <ClInclude Include="Core\Domain\Repositories\Repositories.h" />
+    <ClInclude Include="Core\Domain\Repositories\repositories.h" />
     <ClInclude Include="Core\Domain\Entites\File\file.h" />
+    <ClInclude Include="Core\Domain\UseCases\SerializationUseCase\serializationUseCase.h" />
+    <ClInclude Include="Core\Domain\UseCases\SerializationUseCase\Serialization\serialization.h" />
+    <ClInclude Include="Core\Domain\UseCases\SerializationUseCase\ValueParser\valueParser.h" />
     <ClInclude Include="Infrastructure\Config\servicesConfig.h" />
     <ClInclude Include="Services\Encryption\Base\AEncryption.h" />
     <ClInclude Include="Services\Encryption\Base\IEncryption.h" />
@@ -181,6 +187,7 @@
     <ClInclude Include="Services\Randomizers\KeyRandomizer\keyRandomizer.h" />
     <ClInclude Include="Services\Randomizers\randomizers.h" />
     <ClInclude Include="Services\services.h" />
+    <ClInclude Include="Services\Wrapper\staticWrapper.h" />
     <ClInclude Include="Services\Wrapper\wrapper.h" />
     <ClInclude Include="Core\Domain\UseCases\DirectoryUseCase\directoryUseCase.h" />
     <ClInclude Include="Core\Domain\Entites\File\Abstraction\AFile.h" />
@@ -201,8 +208,8 @@
     <ClInclude Include="Tests\testHandler.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core\Data\Sources\Local\local" />
-    <None Include="Core\Data\Sources\Remote\remote" />
+    <None Include="Core\Data\Sources\Local\local.bin" />
+    <None Include="Core\Data\Sources\Remote\remote.bin" />
     <None Include="Infrastructure\Config\config.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,13 +5,14 @@ void DirectoryUseCase::addByParams(shared_ptr<Directory>& directory, const strin
     INFO("class DirectoryUseCase -> static method add: Creating by parameters;");
 
     if (!directory) { ERROR("class DirectoryUseCase -> static method add: Directory pointer is null!"); throw invalid_argument("Directory pointer is null!"); }
+    if (directory->getContents().size() >= directory->getDirectoryMaxSize()) { ERROR("class DirectoryUseCase -> static method add: Directory has reached its maximum size!"); throw runtime_error("Directory has reached its maximum size!"); }
 
     switch (fileType)
     {
         case FileTypes::DirectoryType: { INFO("class DirectoryUseCase -> static method add: Adding a directory;"); directory->getContents().push_back(make_shared<Directory>(name, isHidden)); } break;
         default: { INFO("class DirectoryUseCase -> static method add: Adding a unit;"); directory->getContents().push_back(make_shared<Unit>(name, isHidden, fileType)); }
     }
-    
+
     INFO("class DirectoryUseCase -> static method add: The operation was completed successfully!;");
 }
 void DirectoryUseCase::addByUnit(shared_ptr<Directory>& directory, const shared_ptr<Unit>& unit)
@@ -19,6 +20,7 @@ void DirectoryUseCase::addByUnit(shared_ptr<Directory>& directory, const shared_
     INFO("class DirectoryUseCase -> static method add: Creating by unit;");
 
     if (!directory) { ERROR("class DirectoryUseCase -> static method add: Directory pointer is null!"); throw invalid_argument("Directory pointer is null!"); }
+    if (directory->getContents().size() >= directory->getDirectoryMaxSize()) { ERROR("class DirectoryUseCase -> static method add: Directory has reached its maximum size!"); throw runtime_error("Directory has reached its maximum size!"); }
     if (!unit) { ERROR("class DirectoryUseCase -> static method add: Unit pointer is null!"); throw invalid_argument("Unit pointer is null!"); }
 
     directory->getContents().push_back(unit);

@@ -2,6 +2,7 @@
 #define DOMAIN_USECASES_H
 
 #include "DirectoryUseCase/directoryUseCase.h"
+#include "SerializationUseCase/serializationUseCase.h"
 #include "TextFileUseCase/textFileUseCase.h"
 
 #endif

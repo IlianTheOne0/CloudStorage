@@ -10,6 +10,7 @@ void testConstructorAndGetContent()
     bool isHidden = false;
 
     Wrapper<TextFile> textFile(name, content, isHidden);
+    textFile = Wrapper<TextFile>(name, content, isHidden);
 
     cout << "Name: " << textFile.call()(&TextFile::getName, "getName") << endl;
     cout << "Content: " << textFile.call()(&TextFile::getContent, "getContent") << endl;
@@ -28,6 +29,7 @@ void testEditContentAndGetContent()
 
     Wrapper<TextFile> textFile(name, initialContent, isHidden);
     textFile.call()(&TextFile::editContent, "editContent", newContent);
+    textFile = Wrapper<TextFile>(name, newContent, isHidden);
 
     cout << "Name: " << textFile.call()(&TextFile::getName, "getName") << endl;
     cout << "Content: " << textFile.call()(&TextFile::getContent, "getContent") << endl;

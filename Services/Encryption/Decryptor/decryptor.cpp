@@ -19,16 +19,6 @@ string Decryptor::decrypt(const EncryptionData& encryptedData, const string& pas
         for (unsigned char& byte : result) { byte = inverse_sbox[byte]; }
         for (size_t i = 0; i < result.size(); i++) { result[i] ^= key[(i + round) % key.size()]; }
     }
-    
-    cout << endl << endl;
-    cout << endl << endl;
-    cout << endl << endl;
-    cout << encryptedData.getSBox() << endl;
-    cout << endl << endl;
-    cout << encryptedData.getInverseSBox() << endl;
-    cout << endl << endl;
-    cout << endl << endl;
-    cout << endl << endl;
 
     return string(result.begin(), result.end());
 }

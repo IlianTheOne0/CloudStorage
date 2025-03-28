@@ -5,6 +5,7 @@
 #include "Logger/logger.h"
 #include "Parsers/parsers.h"
 #include "Randomizers/randomizers.h"
+#include "Wrapper/staticWrapper.h"
 #include "Wrapper/wrapper.h"
 
 #endif

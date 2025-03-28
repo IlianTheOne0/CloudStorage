@@ -8,6 +8,7 @@ void testNewEncryptor(const string& data, const string& password)
     try
     {
         EncryptionData encrypted = encryptor.call()(&Encryptor::encrypt, "encrypt", data, password);
+        encryptor = Wrapper<Encryptor>();
         cout << "Encrypted: " << encrypted.getData() << endl;
     }
     catch (const exception& e) { cout << "Encryption failed: " << e.what() << endl; }
@@ -20,6 +21,7 @@ void testNewDecryptor(const EncryptionData& encryptedData, const string& passwor
     try
     {
         string decrypted = decryptor.call()(&Decryptor::decrypt, "decrypt", encryptedData, password);
+        decryptor = Wrapper<Decryptor>();
         cout << "Decrypted: " << decrypted << endl;
     }
     catch (const exception& e) { cout << "Decryption failed: " << e.what() << endl; }
@@ -32,6 +34,7 @@ void testNewEncryptorDecryptCall(const EncryptionData& encryptedData, const stri
     try
     {
         string decrypted = encryptor.call()(&Encryptor::decrypt, "decrypt", encryptedData, password);
+        encryptor = Wrapper<Encryptor>();
         cout << "Unexpected success: " << decrypted << endl;
     }
     catch (const exception& e) { cout << "Expected exception: " << e.what() << endl; }
@@ -44,6 +47,7 @@ void testNewDecryptorEncryptCall(const string& data, const string& password)
     try
     {
         EncryptionData encrypted = decryptor.call()(&Decryptor::encrypt, "encrypt", data, password);
+        decryptor = Wrapper<Decryptor>();
         cout << "Unexpected success: " << encrypted.getData() << endl;
     }
     catch (const exception& e) { cout << "Expected exception: " << e.what() << endl; }

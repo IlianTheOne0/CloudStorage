@@ -8,9 +8,10 @@ class TextFile
     : public AFile
 {
 public:
-    TextFile() = delete;
+    TextFile() = default;
     TextFile(const string& name, const string& content, const bool& isHidden = false);
     ~TextFile() override = default;
 };
+
 
 #endif

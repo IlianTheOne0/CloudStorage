@@ -4,8 +4,8 @@
 class DataSyncRepository
 {
 public:
-	static bool synkFromRemote();
 	static bool synkFromLocal();
+	static bool synkFromRemote();
 };
 
 #endif

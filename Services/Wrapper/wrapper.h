@@ -25,7 +25,9 @@ private:
         WrapperPtr() = delete;
 
         template<typename TMethod, typename... TArgs>
+        
         auto operator()(TMethod method, const string& methodName, TArgs&&... args)
+            -> decltype(auto)
         {
             INFO(string(typeid(TValue).name()) + " -> method " + methodName + ": called;");
             return (_ptr.get()->*method)(forward<TArgs>(args)...);
@@ -40,26 +42,6 @@ public:
 
     WrapperPtr call() { return WrapperPtr(_obj); }
     shared_ptr<TValue> get() { return _obj; }
-};
-
-template<typename TValue>
-class StaticWrapper
-{
-public:
-    class StaticWrapperPtr
-    {
-    public:
-        StaticWrapperPtr() = default;
-
-        template<typename TMethod, typename... TArgs>
-        auto operator()(TMethod method, const string& methodName, TArgs&&... args)
-        {
-            INFO(string(typeid(TValue).name()) + " -> static method " + methodName + ": called;");
-            return method(forward<TArgs>(args)...);
-        }
-    };
-
-    static StaticWrapperPtr call() { return StaticWrapperPtr(); }
 };
 
 #endif
