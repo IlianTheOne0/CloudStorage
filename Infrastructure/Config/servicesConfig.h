@@ -12,7 +12,6 @@
 #include <random>
 #include <array>
 #include <iomanip>
-#include <vector>
 #include <exception>
 #include <chrono>
 
@@ -20,6 +19,7 @@ using std::string;
 using std::map;
 using std::vector;
 using std::pair;
+using std::tuple;
 using std::ifstream;
 using std::istringstream;
 using std::stringstream;

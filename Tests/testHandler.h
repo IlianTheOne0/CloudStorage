@@ -13,6 +13,7 @@ private:
     static void providerTest();
     static void encryptorTest();
     static void serializationTest();
+    static void fullTest();
 public:
     static void setTestCounter(const unsigned short& value) { _testCounter = value; }
     static void startTheTest()
@@ -26,6 +27,7 @@ public:
             case 4: { providerTest(); } break;
             case 5: { encryptorTest(); } break;
             case 6: { serializationTest(); } break;
+            case 7: { fullTest(); } break;
             default: {}
         }
     }

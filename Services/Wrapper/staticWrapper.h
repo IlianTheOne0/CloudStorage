@@ -18,7 +18,6 @@ public:
 
         template<typename TMethod, typename... TArgs>
         auto operator()(TMethod method, const string& methodName, TArgs&&... args)
-            -> decltype(auto)
         {
             INFO(string(typeid(TValue).name()) + " -> static method " + methodName + ": called;");
             return method(forward<TArgs>(args)...);

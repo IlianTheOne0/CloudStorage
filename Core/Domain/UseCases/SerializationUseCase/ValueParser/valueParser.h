@@ -13,7 +13,7 @@ private:
 
 	template<typename TValue> TValue parseValue(const string& str);
 	time_t parseTime(const string& str);
-	void skipWhitespace();
+	template<> bool parseValue<bool>(const string& str);
 	string parseKey();
 	string parseString();
 
@@ -21,6 +21,8 @@ private:
 	void parseContents(vector<shared_ptr<Unit>>& contents);
 	shared_ptr<Directory> parseDirectory();
 	shared_ptr<AFile> parseAFile();
+
+	void skipWhitespace();
 public:
 	Parser() = default;
 	Parser(const string& str);

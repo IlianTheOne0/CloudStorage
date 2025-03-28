@@ -9,8 +9,16 @@ template<typename TValue> TValue Parser::parseValue(const string& str)
 	return value;
 }
 
+template<>
+bool Parser::parseValue<bool>(const string& str)
+{
+	if (str == "true") return true;
+	if (str == "false") return false;
+
+	return static_cast<bool>(stoi(str));
+}
+
 time_t Parser::parseTime(const string& str) { return static_cast<time_t>(stol(str)); }
-void Parser::skipWhitespace() { while (pos < data.size() && isspace(data[pos])) { pos++; } }
 
 string Parser::parseKey()
 {
@@ -127,6 +135,8 @@ shared_ptr<AFile> Parser::parseAFile()
 
 	return file;
 }
+
+void Parser::skipWhitespace() { while (pos < data.size() && isspace(data[pos])) { pos++; } }
 
 Parser::Parser(const string& str)
 	: data(str)
