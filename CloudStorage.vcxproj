@@ -137,6 +137,7 @@
     <ClCompile Include="Core\Domain\UseCases\SerializationUseCase\Serialization\serialization.cpp" />
     <ClCompile Include="Core\Domain\UseCases\SerializationUseCase\ValueParser\valueParser.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\consoleView.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Clock\clock.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Frame\frame.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\updater.cpp" />
     <ClCompile Include="Services\Encryption\Base\AEncryption.cpp" />

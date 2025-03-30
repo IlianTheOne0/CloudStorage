@@ -26,6 +26,8 @@ public:
 	void display(const ViewModel& viemModel) override;
 
 	static pair<int, int> getTerminalSize();
+
+	static void gotoxy(int x, int y);
 };
 
 #endif

@@ -3,13 +3,28 @@
 
 namespace Screen
 {
-	wstring update()
-	{
-		clear;
+    void updateClock(bool padding)
+    {
+        while (true)
+        {
+            if (padding) { ConsoleView::gotoxy(2, 2); }
+            else { ConsoleView::gotoxy(1, 1); }
+            wcout << Screen::Clock::getCurrentDateTime();
+            sleep_for(seconds(1));
+        }
+    }
 
-		wstringstream stream;
-		stream << Screen::Frame::draw();
+    void update()
+    {
+        ConfigParser _config(CONFIG_PATH);
+        if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
+        bool padding = (_config.get("consolePadding") == "true");
 
-		return stream.str();
-	}
+        clear;
+
+        wcout << Screen::Frame::draw();
+
+        thread clockThread([](bool padding) { updateClock(padding); }, padding);
+        clockThread.detach();
+    }
 }

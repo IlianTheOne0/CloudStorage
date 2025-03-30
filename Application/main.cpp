@@ -23,8 +23,7 @@ int main()
     Presenter presenter(&view);
 
     view.setTerminalPropeties();
-    SetConsoleOutputCP(CP_UTF8);
-    wcout << Screen::update();
+    Screen::update();
     pause;
     //presenter.present({"Hi", "Hello world!"});
 

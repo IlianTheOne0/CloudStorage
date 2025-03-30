@@ -5,7 +5,8 @@
 
 namespace Screen
 {
-	wstring update();
+	void updateClock(wstringstream& overlayStream, bool padding);
+	void update();
 
 	class Frame
 	{
@@ -17,6 +18,12 @@ namespace Screen
 		static void initValues();
 	public:
 		static wstring draw();
+	};
+
+	class Clock
+	{
+	public:
+		static wstring getCurrentDateTime();
 	};
 }
 
