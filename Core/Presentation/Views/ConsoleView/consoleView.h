@@ -1,0 +1,31 @@
+#ifndef CONSOLE_VIEW_H
+#define CONSOLE_VIEW_H
+
+#include "../IView.h"
+#include "../../ViewModels/viewModel.h"
+
+#define clear _clear();
+#define pause _pause();
+
+void _clear();
+void _pause();
+
+class ConsoleView
+	: public IView
+{
+private:
+	static int _width;
+	static int _height;
+	static HANDLE _window;
+
+	static ConfigParser _config;
+public:
+	ConsoleView();
+
+	void setTerminalPropeties();
+	void display(const ViewModel& viemModel) override;
+
+	static pair<int, int> getTerminalSize();
+};
+
+#endif

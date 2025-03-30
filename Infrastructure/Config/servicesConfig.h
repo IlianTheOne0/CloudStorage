@@ -42,6 +42,7 @@ using std::setfill;
 using std::vector;
 using std::domain_error;
 
-#define DEFAULT_VALUE ""
+#define DEFAULT_VALUE "false"
+#define DEFAULT_WVALUE L"false"
 
 #endif

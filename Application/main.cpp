@@ -1,13 +1,12 @@
 #include "../Infrastructure/Config/mainConfig.h"
 #include "../Tests/testHandler.h"
-
-#include <exception>
-using std::exception;
+#include "../Core/core.h"
 
 int main()
 {
     ConfigParser config(CONFIG_PATH);
-    if (!config.load()) {
+    if (!config.load())
+    {
         ERROR("Cannot load the config");
         cerr << "Error: (main) Cannot load the config" << endl;
         return 1;
@@ -18,8 +17,16 @@ int main()
 
     WARNING("Start of the program");
 
-    try { TestHandler::startTheTest(); }
-    catch (const exception& e) { cerr << "Error: (test handler) " << e.what() << endl; }
+    TestHandler::startTheTest();
+
+    ConsoleView view;
+    Presenter presenter(&view);
+
+    view.setTerminalPropeties();
+    SetConsoleOutputCP(CP_UTF8);
+    wcout << Screen::update();
+    pause;
+    //presenter.present({"Hi", "Hello world!"});
 
     WARNING("End of the program");
     return 0;

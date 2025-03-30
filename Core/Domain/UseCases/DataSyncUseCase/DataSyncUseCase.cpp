@@ -58,7 +58,7 @@ string DataSyncUseCase::getData() {
     try {
         string data = local.load();
 
-        if (data.size() < 256 * 2 + 512) { ERROR("class DataSyncUseCase -> static method synkFromRemote: invalid line length! (" + to_string(data.size()) + ");"); throw invalid_argument("invalid line length! (" + to_string(data.size()) + ")"); }
+        if (data.size() < 256 * 2 + 512) { ("class DataSyncUseCase -> static method synkFromRemote: invalid line length! (" + to_string(data.size()) + ");"); throw invalid_argument("invalid line length! (" + to_string(data.size()) + ")"); }
 
         size_t pos = 0; string sbox_part = data.substr(pos, 256);
         pos += 256; string invertedSBox_part = data.substr(pos, 256);
