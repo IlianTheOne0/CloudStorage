@@ -18,7 +18,7 @@ ConsoleView::ConsoleView()
     _height = stoi(_config.get("consoleHeight"));
 }
 
-void ConsoleView::setTerminalPropeties()
+void ConsoleView::setTerminalProperties()
 {
     if (_window == INVALID_HANDLE_VALUE) { ERROR("class ConsoleView -> static method setTerminalProperties: Unable to get the console handle!;"); throw runtime_error("Unable to get console handle"); }
 
@@ -41,12 +41,6 @@ void ConsoleView::setTerminalPropeties()
     SetWindowPos(console, nullptr, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
 
     _setmode(_fileno(stdout), _O_U16TEXT);
-}
-
-void ConsoleView::display(const ViewModel& viewModel)
-{
-    cout << viewModel.title << endl;
-    cout << viewModel.message << endl;
 }
 
 pair<int, int> ConsoleView::getTerminalSize() { return pair<int, int>{_width, _height}; }

@@ -1,12 +1,33 @@
 #ifndef PRESENTATION_SCREEN_H
 #define PRESENTATION_SCREEN_H
 
+#include "../../../../Domain/domain.h"
 #include "../../../../../Infrastructure/Config/presentationConfig.h"
 
+class Presenter;
 namespace Screen
 {
-	void updateClock(wstringstream& overlayStream, bool padding);
-	void update();
+	class Updater
+	{
+	private:
+		static shared_mutex _consoleMutex;
+		static atomic<bool> _exitFlag;
+		static atomic<bool> _isStarted;
+		static shared_ptr<Directory> _rootDirectory;
+	protected:
+		static void redrawFrame(bool padding);
+		static void updateMessage(bool padding, const HeaderTypes& title, const wstring& message);
+		static void handleInput(Presenter& presenter, bool padding);
+	public:
+		static void setData(const shared_ptr<Directory>& root);
+		static shared_ptr<Directory> getData();
+
+		static bool getExitFlag();
+		static void setExitFlag(const bool& value);
+
+		static void start(Presenter& presenter);
+		static void update();
+	};
 
 	class Frame
 	{
@@ -24,6 +45,18 @@ namespace Screen
 	{
 	public:
 		static wstring getCurrentDateTime();
+	};
+
+	class InputHandler
+	{
+	public:
+		static ViewModel inputHandling(Presenter& presenter);
+	};
+	
+	class Tree
+	{
+	public:
+		static wstring draw(const shared_ptr<Directory>& rootDirectory);
 	};
 }
 

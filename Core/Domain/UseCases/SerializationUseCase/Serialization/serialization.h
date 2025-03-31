@@ -1,7 +1,7 @@
 #ifndef SERIALIZATION_USECASE_H
 #define SERIALIZATION_USECASE_H
 
-#include "../../../Entites/entites.h"
+#include "../../../Entities/entities.h"
 #include "../../../../../Infrastructure/Config/domainConfig.h"
 #include "../ValueParser/valueParser.h"
 

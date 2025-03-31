@@ -1,6 +1,6 @@
 #include "../../testHandler.h"
 #include "../../../Infrastructure/Config/testConfig.h"
-#include "../../../Core/Domain/Entites/File/file.h"
+#include "../../../Core/Domain/Entities/File/file.h"
 #include "../../../Core/Domain/UseCases/TextFileUseCase/textFileUseCase.h"
 
 void testConstructorAndGetContent()

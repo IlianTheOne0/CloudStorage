@@ -7,13 +7,11 @@
 class Presenter
 	: public IPresenter
 {
-private:
-	IView* _view;
 public:
-	Presenter(IView* view);
+	Presenter() = default;
 	~Presenter() override = default;
 
-	void present(const DomainResponse& response) override;
+	ViewModel handle(const wstring& input) override;
 };
 
 #endif

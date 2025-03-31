@@ -23,12 +23,12 @@ bool Frame::_padding;
 
 void Frame::initValues()
 {
-	ConfigParser _config(CONFIG_PATH);
-	if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
+    ConfigParser _config(CONFIG_PATH);
+    if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
 
-	_padding = (_config.get("consolePadding") == "true") ? true : false;
-	_width = ConsoleView::getTerminalSize().first;
-	_height = ConsoleView::getTerminalSize().second;
+    _padding = (_config.get("consolePadding") == "true") ? true : false;
+    _width = ConsoleView::getTerminalSize().first;
+    _height = ConsoleView::getTerminalSize().second;
 }
 
 wstring Frame::draw()
@@ -36,7 +36,7 @@ wstring Frame::draw()
     initValues();
     wstringstream stream;
 
-    const int leftMin = 20;
+    const int leftMin = 19;
     const int middleMin = 8;
     const int rightMin = 21;
     const int separatorWidth = 1;

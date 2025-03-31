@@ -1,7 +1,6 @@
 #ifndef CONSOLE_VIEW_H
 #define CONSOLE_VIEW_H
 
-#include "../IView.h"
 #include "../../ViewModels/viewModel.h"
 
 #define clear _clear();
@@ -11,7 +10,6 @@ void _clear();
 void _pause();
 
 class ConsoleView
-	: public IView
 {
 private:
 	static int _width;
@@ -22,8 +20,7 @@ private:
 public:
 	ConsoleView();
 
-	void setTerminalPropeties();
-	void display(const ViewModel& viemModel) override;
+	void setTerminalProperties();
 
 	static pair<int, int> getTerminalSize();
 

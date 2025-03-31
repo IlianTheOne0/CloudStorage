@@ -1,14 +1,17 @@
 #ifndef PRESENTER_INTERFACE_H
 #define PRESENTER_INTERFACE_H
 
-#include "../Entites/entites.h"
+#include "../Entities/DomainResponse/domainResponse.h"
+#include "../Entities/DomainResponse/headerTypeEnum.h"
+#include "../../Presentation/presentation.h"
+#include "../../../Infrastructure/Config/domainConfig.h"
 
 class IPresenter
 {
 public:
 	virtual ~IPresenter() = default;
 
-	virtual void present(const DomainResponse& response) = 0;
+	virtual ViewModel handle(const wstring& input) = 0;
 };
 
 #endif

@@ -3,7 +3,7 @@
 
 #include "../../../../Infrastructure/Config/domainConfig.h"
 
-#include "../../Entites/Directory/directory.h"
+#include "../../Entities/Directory/directory.h"
 
 class DirectoryUseCase
 {

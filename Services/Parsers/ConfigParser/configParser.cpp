@@ -5,7 +5,8 @@ ConfigParser::ConfigParser(const string& path)
 {}
 ConfigParser::~ConfigParser() {}
 
-bool ConfigParser::load() {
+bool ConfigParser::load()
+{
     ifstream file(_path);
     if (!file.is_open()) { return false; }
 
@@ -21,7 +22,8 @@ bool ConfigParser::load() {
     return true;
 }
 
-string ConfigParser::get(const string& key) const {
+string ConfigParser::get(const string& key) const
+{
     map<string, string>::const_iterator iterator = _data.find(key);
     return (iterator != _data.end()) ? iterator->second : DEFAULT_VALUE;
 }

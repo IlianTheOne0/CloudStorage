@@ -1,8 +1,8 @@
 #ifndef FILES_USECASE_TEXTFILE_H
 #define FILES_USECASE_TEXTFILE_H
 
-#include "../../Entites/File/Abstraction/AFile.h"
-#include "../../Entites/Unit/unitTypesEnum.h"
+#include "../../Entities/File/Abstraction/AFile.h"
+#include "../../Entities/Unit/unitTypesEnum.h"
 
 class TextFile
     : public AFile

@@ -1,7 +1,7 @@
 #ifndef SERIALIZATION_VALUEPARSER_USECASE_H
 #define SERIALIZATION_VALUEPARSER_USECASE_H
 
-#include "../../../Entites/entites.h"
+#include "../../../Entities/entities.h"
 #include "../../TextFileUseCase/textFileUseCase.h"
 #include "../../../../../Infrastructure/Config/domainConfig.h"
 

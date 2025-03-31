@@ -1,3 +1,4 @@
+#include "loop.h"
 #include "../Infrastructure/Config/mainConfig.h"
 #include "../Tests/testHandler.h"
 #include "../Core/core.h"
@@ -18,14 +19,7 @@ int main()
     WARNING("Start of the program");
 
     TestHandler::startTheTest();
-
-    ConsoleView view;
-    Presenter presenter(&view);
-
-    view.setTerminalPropeties();
-    Screen::update();
-    pause;
-    //presenter.present({"Hi", "Hello world!"});
+    loop();
 
     WARNING("End of the program");
     return 0;

@@ -14,11 +14,13 @@
 #include <ctime>
 #include <thread>
 #include <future>
+#include <shared_mutex>
 
 using std::wstring;
 using std::runtime_error;
 using std::wstringstream;
 using std::wcout;
+using std::wcin;
 using std::setw;
 using std::setfill;
 using std::chrono::time_point;
@@ -31,5 +33,10 @@ using std::launch;
 using std::thread;
 using std::this_thread::sleep_for;
 using std::chrono::seconds;
+using std::chrono::milliseconds;
+using std::shared_mutex;
+using std::shared_lock;
+using std::atomic;
+using std::unique_lock;
 
 #endif

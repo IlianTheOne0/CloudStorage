@@ -10,6 +10,7 @@
 #include <exception>
 
 using std::string;
+using std::wstring;
 using std::to_string;
 using std::vector;
 using std::shared_ptr;
