@@ -15,10 +15,12 @@ namespace Screen
         static atomic<bool> _isStarted;
         static shared_ptr<Directory> _rootDirectory;
         static stack<shared_ptr<Directory>> _directoryStack;
+        static wstring _path;
 
         static void redrawFrame(bool padding);
         static void updateMessage(bool padding, const HeaderTypes& title, const wstring& message);
         static void handleInput(Presenter& presenter, bool padding);
+        static void updatePath();
     public:
         static void setData(const shared_ptr<Directory>& root, bool pushToStack = true);
         static shared_ptr<Directory> getParentDirectory();

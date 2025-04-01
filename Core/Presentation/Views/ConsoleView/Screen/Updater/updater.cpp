@@ -4,11 +4,14 @@
 
 using namespace Screen;
 
+void localGoto(bool padding, int x, int y) { if (padding) { ConsoleView::gotoxy(x, y); } else { ConsoleView::gotoxy(x - 1, y - 1); } };
+
 shared_mutex Updater::_consoleMutex;
 atomic<bool> Updater::_exitFlag(false);
 atomic<bool> Updater::_isStarted(false);
 shared_ptr<Directory> Updater::_rootDirectory = nullptr;
 stack<shared_ptr<Directory>> Updater::_directoryStack;
+wstring Updater::_path = L"root\\";
 
 void Updater::setData(const shared_ptr<Directory>& root, bool pushToStack)
 {
@@ -35,13 +38,14 @@ void Updater::redrawFrame(bool padding)
         clear;
         wcout << Frame::draw();
 
-        if (padding) { ConsoleView::gotoxy(6, 2); }
-        else { ConsoleView::gotoxy(5, 1); }
+        localGoto(padding, 6, 2);
         wcout << Clock::getCurrentDateTime();
         wcout << Tree::draw(_rootDirectory);
 
-        if (padding) { ConsoleView::gotoxy(32, ConsoleView::getTerminalSize().second - 3); }
-        else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); }
+        localGoto(padding, 32, 2);
+        Updater::updatePath(); wcout << _path;
+
+        localGoto(padding, 32, ConsoleView::getTerminalSize().second - 3);
         if (_exitFlag) break;
 
         sleep_for(seconds(60));
@@ -50,20 +54,19 @@ void Updater::redrawFrame(bool padding)
 
 void Updater::updateMessage(bool padding, const HeaderTypes& title, const wstring& message)
 {
-    auto localGoto = [padding](int x, int y) { if (padding) { ConsoleView::gotoxy(x, y); } else { ConsoleView::gotoxy(x - 1, y - 1); } };
     switch (title)
     {
-        case HeaderTypes::ErrorType: { localGoto(22, 2); wcout << L"ERROR"; } break;
-        case HeaderTypes::InputType: { localGoto(22, 2); wcout << L"WAITING"; } break;
-        case HeaderTypes::FillType: { localGoto(22, 2); wcout << L"FILLING"; } break;
-        case HeaderTypes::SuccessfulType: { localGoto(21, 2); wcout << L"SUCCESS"; } break;
-        default: { localGoto(22, 2); wcout << L"ERROR"; }
+        case HeaderTypes::ErrorType: { localGoto(padding, 22, 2); wcout << L"ERROR"; } break;
+        case HeaderTypes::InputType: { localGoto(padding, 22, 2); wcout << L"WAITING"; } break;
+        case HeaderTypes::FillType: { localGoto(padding, 22, 2); wcout << L"FILLING"; } break;
+        case HeaderTypes::SuccessfulType: { localGoto(padding, 21, 2); wcout << L"SUCCESS"; } break;
+        default: { localGoto(padding, 22, 2); wcout << L"ERROR"; }
     }
 
     int maxIterator = ConsoleView::getTerminalSize().first;
     if (padding) { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 3); maxIterator -= (31 + 2); }
     else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); maxIterator -= (31 + 2); }
-    
+
     wstringstream stream;
     for (int i = 0; i < maxIterator; i++) { stream << L' '; }
     wcout << stream.str();
@@ -78,14 +81,38 @@ void Updater::updateMessage(bool padding, const HeaderTypes& title, const wstrin
 
 void Updater::handleInput(Presenter& presenter, bool padding)
 {
-    while (!_exitFlag) {
-        if (padding) { ConsoleView::gotoxy(32, ConsoleView::getTerminalSize().second - 3); }
-        else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); }
+    while (!_exitFlag)
+    {
+        localGoto(padding, 32, ConsoleView::getTerminalSize().second - 3);
 
         ViewModel viewModel = InputHandler::inputHandling(presenter);
         Updater::updateMessage(padding, viewModel.title, viewModel.message);
 
         if (_exitFlag) break;
+    }
+}
+
+void Updater::updatePath()
+{
+    if (_rootDirectory)
+    {
+        const auto& directoryName = _rootDirectory->getName();
+        wstring currentDirName(directoryName.begin(), directoryName.end());
+
+        vector<wstring> pathElements;
+        wstringstream stream(_path);
+        wstring item;
+
+        while (getline(stream, item, L'\\')) { if (!item.empty()) { pathElements.push_back(item); } }
+
+        if (!pathElements.empty() && pathElements.back() == currentDirName) { return; }
+        else if (pathElements.size() > 1 && pathElements[pathElements.size() - 2] == currentDirName) { pathElements.pop_back(); }
+        else { pathElements.push_back(currentDirName); }
+
+        wstring newPath;
+        for (const wstring& elem : pathElements) { newPath += elem + L'\\'; }
+
+        _path = newPath;
     }
 }
 
@@ -101,14 +128,15 @@ void Updater::start(Presenter& presenter)
 
     thread redrawThread([padding]() { Updater::redrawFrame(padding); });
     thread inputThread([&presenter, padding]() { Updater::handleInput(presenter, padding); });
-        
+
     redrawThread.join();
     inputThread.join();
 }
 
 void Updater::update()
 {
-    if (!_exitFlag) {
+    if (!_exitFlag)
+    {
         ConfigParser _config(CONFIG_PATH);
         if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
         bool padding = (_config.get("consolePadding") == "true");
@@ -117,8 +145,10 @@ void Updater::update()
         wcout << Frame::draw();
         wcout << Tree::draw(_rootDirectory);
 
-        if (padding) { ConsoleView::gotoxy(6, 2); }
-        else { ConsoleView::gotoxy(5, 1); }
+        localGoto(padding, 32, 2);
+        Updater::updatePath(); wcout << _path;
+
+        localGoto(padding, 6, 2);
         wcout << Clock::getCurrentDateTime();
     }
     else { clear; }

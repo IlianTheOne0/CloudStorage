@@ -27,7 +27,7 @@ void loop()
         shared_ptr<Directory> rootDirectory = nullptr;
         if (!serializedData.empty())
         {
-            wcout << toWString2(serializedData) << endl; system("pause");
+            //wcout << toWString2(serializedData) << endl; system("pause");
             shared_ptr<Unit> rootUnit = Serializer::deserialize(serializedData);
             rootDirectory = dynamic_pointer_cast<Directory>(rootUnit);
         }
@@ -41,7 +41,7 @@ void loop()
         while (!Screen::Updater::getExitFlag()) { Screen::Updater::update(); }
 
         string finalData = Serializer::serializeDirectory(rootDirectory.get());
-        wcout << toWString2(finalData) << endl; system("pause");
+        //wcout << toWString2(finalData) << endl; system("pause");
         DataSyncUseCase::setData(finalData);
         DataSyncUseCase::synkFromLocal();
 
