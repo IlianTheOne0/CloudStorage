@@ -8,9 +8,21 @@ shared_mutex Updater::_consoleMutex;
 atomic<bool> Updater::_exitFlag(false);
 atomic<bool> Updater::_isStarted(false);
 shared_ptr<Directory> Updater::_rootDirectory = nullptr;
+stack<shared_ptr<Directory>> Updater::_directoryStack;
 
-void Updater::setData(const shared_ptr<Directory>& root) { _rootDirectory = root; }
+void Updater::setData(const shared_ptr<Directory>& root, bool pushToStack)
+{
+    if (pushToStack && _rootDirectory) { _directoryStack.push(_rootDirectory); }
+    _rootDirectory = root;
+}
+
 shared_ptr<Directory> Updater::getData() { return _rootDirectory; }
+
+shared_ptr<Directory> Updater::getParentDirectory()
+{
+    if (!_directoryStack.empty()) { shared_ptr<Directory> parentDirectory = _directoryStack.top(); _directoryStack.pop(); return parentDirectory; }
+    return nullptr;
+}
 
 bool Updater::getExitFlag() { return _exitFlag.load(); }
 void Updater::setExitFlag(const bool& value) { _exitFlag = value; }
@@ -30,6 +42,7 @@ void Updater::redrawFrame(bool padding)
 
         if (padding) { ConsoleView::gotoxy(32, ConsoleView::getTerminalSize().second - 3); }
         else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); }
+        if (_exitFlag) break;
 
         sleep_for(seconds(60));
     }
@@ -79,18 +92,20 @@ void Updater::updateMessage(bool padding, const HeaderTypes& title, const wstrin
     else { ConsoleView::gotoxy(30, ConsoleView::getTerminalSize().second - 2); }
     wcout << message;
 
-    pause; update();
+    pause;
+    update();
 }
 
 void Updater::handleInput(Presenter& presenter, bool padding)
 {
-    while (!_exitFlag)
-    {
+    while (!_exitFlag) {
         if (padding) { ConsoleView::gotoxy(32, ConsoleView::getTerminalSize().second - 3); }
         else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); }
 
         ViewModel viewModel = InputHandler::inputHandling(presenter);
         Updater::updateMessage(padding, viewModel.title, viewModel.message);
+
+        if (_exitFlag) break;
     }
 }
 
@@ -106,24 +121,28 @@ void Updater::start(Presenter& presenter)
 
     thread redrawThread([padding]() { Updater::redrawFrame(padding); });
     thread inputThread([&presenter, padding]() { Updater::handleInput(presenter, padding); });
-
-    redrawThread.detach();
+        
+    redrawThread.join();
     inputThread.join();
+
+    shared_ptr<Directory> rootDirectory = getData();
+    if (rootDirectory) { string serializedData = Serializer::serializeDirectory(rootDirectory.get()); DataSyncUseCase::setData(serializedData); }
 }
 
 void Updater::update()
 {
-    ConfigParser _config(CONFIG_PATH);
-    if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
-    bool padding = (_config.get("consolePadding") == "true");
+    if (!_exitFlag) {
+        ConfigParser _config(CONFIG_PATH);
+        if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
+        bool padding = (_config.get("consolePadding") == "true");
 
-    clear;
-    wcout << Frame::draw();
-    wcout << Tree::draw(_rootDirectory);
+        clear;
+        wcout << Frame::draw();
+        wcout << Tree::draw(_rootDirectory);
 
-    if (padding) { ConsoleView::gotoxy(6, 2); }
-    else { ConsoleView::gotoxy(5, 1); }
-    wcout << Clock::getCurrentDateTime();
-
-    if (_exitFlag) { clear; }
+        if (padding) { ConsoleView::gotoxy(6, 2); }
+        else { ConsoleView::gotoxy(5, 1); }
+        wcout << Clock::getCurrentDateTime();
+    }
+    else { clear; }
 }

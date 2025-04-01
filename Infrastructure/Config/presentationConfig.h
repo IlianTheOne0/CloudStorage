@@ -15,6 +15,8 @@
 #include <thread>
 #include <future>
 #include <shared_mutex>
+#include <stack>
+#include <algorithm>
 
 using std::wstring;
 using std::runtime_error;
@@ -38,5 +40,7 @@ using std::shared_mutex;
 using std::shared_lock;
 using std::atomic;
 using std::unique_lock;
+using std::stack;
+using std::any_of;
 
 #endif

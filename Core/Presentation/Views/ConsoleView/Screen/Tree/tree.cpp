@@ -29,7 +29,7 @@ void drawCurrentDirectoryTree(const shared_ptr<Directory>& directory, int& x, in
         wcout << directoryName;
 
         const auto& contents = directory->getContents();
-        for (size_t i = 0; i < contents.size(); ++i)
+        for (size_t i = 0; i < contents.size(); i++)
         {
             const auto& unit = contents[i];
             bool last = (i == contents.size() - 1);
