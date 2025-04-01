@@ -41,11 +41,25 @@ ViewModel Presenter::handle(const wstring& input)
             wstring dirName = isHidden ? tokens[2] : tokens[1];
 
             shared_ptr<Directory> root = Screen::Updater::getData();
-            if (any_of(root->getContents().begin(), root->getContents().end(), [&](auto& u) { return u->getName() == wstringToString(dirName); }))
+            if (any_of(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == wstringToString(dirName); }))
             { return { HeaderTypes::ErrorType, L"Directory exists" }; }
 
             DirectoryUseCase::addByParams(root, wstringToString(dirName), FileTypes::DirectoryType, isHidden);
             return { HeaderTypes::SuccessfulType, L"Directory created" };
+        }
+        else if (tokens[0] == L"notepad")
+        {
+            if (tokens.size() < 2) { return result; };
+
+            bool isHidden = tokens.size() > 2 && tokens[1] == L"-h";
+            wstring fileName = isHidden ? tokens[2] : tokens[1];
+
+            shared_ptr<Directory> root = Screen::Updater::getData();
+            if (any_of(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == wstringToString(fileName); }))
+            { return { HeaderTypes::ErrorType, L"File exists" }; }
+
+            DirectoryUseCase::addByParams(root, wstringToString(fileName) + ".text", FileTypes::TextFileType, isHidden);
+            return { HeaderTypes::SuccessfulType, L"File created" };
         }
         else if (tokens[0] == L"cd")
         {
@@ -73,6 +87,24 @@ ViewModel Presenter::handle(const wstring& input)
                 }
             }
             return { HeaderTypes::ErrorType, L"Directory '" + tokens[1] + L"' not found"};
+        }
+        else if (tokens[0] == L"del")
+        {
+            if (tokens.size() < 2) { return result; };
+
+            wstring targetName = tokens[1];
+            shared_ptr<Directory> root = Screen::Updater::getData();
+            auto it = find_if(root->getContents().begin(), root->getContents().end(), [&](auto& u) { return u->getName() == wstringToString(targetName); });
+
+            if (it == root->getContents().end()) { return { HeaderTypes::ErrorType, tokens[1] + L" not found" }; }
+
+            auto unit = *it;
+            bool consoleShowHidden = (config.get("consoleShowHidden") == "true");
+
+            if (!consoleShowHidden && unit->getIsHidden()) { return { HeaderTypes::ErrorType, tokens[1] + L" not found" }; }
+
+            DirectoryUseCase::remove(root, wstringToString(targetName));
+            return { HeaderTypes::SuccessfulType, tokens[1] + L" deleted" };
         }
     }
 

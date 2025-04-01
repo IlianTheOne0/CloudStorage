@@ -8,6 +8,8 @@
 #include <memory>
 #include <algorithm>
 #include <exception>
+#include <chrono>
+#include <ctime>
 
 using std::string;
 using std::wstring;
@@ -20,5 +22,6 @@ using std::dynamic_pointer_cast;
 using std::exception;
 using std::invalid_argument;
 using std::runtime_error;
+using std::chrono::system_clock;
 
 #endif

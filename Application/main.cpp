@@ -18,8 +18,7 @@ int main()
 
     WARNING("Start of the program");
 
-    TestHandler::startTheTest();
-    loop();
+    if (!TestHandler::startTheTest()) { loop(); }
 
     WARNING("End of the program");
     return 0;

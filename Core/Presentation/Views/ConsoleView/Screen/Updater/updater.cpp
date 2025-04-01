@@ -50,46 +50,26 @@ void Updater::redrawFrame(bool padding)
 
 void Updater::updateMessage(bool padding, const HeaderTypes& title, const wstring& message)
 {
+    auto localGoto = [padding](int x, int y) { if (padding) { ConsoleView::gotoxy(x, y); } else { ConsoleView::gotoxy(x - 1, y - 1); } };
     switch (title)
     {
-        case HeaderTypes::ErrorType:
-        {
-            if (padding) { ConsoleView::gotoxy(22, 2); }
-            else { ConsoleView::gotoxy(21, 1); }
-            wcout << L"ERROR";
-        } break;
-
-        case HeaderTypes::InputType:
-        {
-            if (padding) { ConsoleView::gotoxy(22, 2); }
-            else { ConsoleView::gotoxy(21, 1); }
-            wcout << L"WAITING";
-        } break;
-
-        case HeaderTypes::FillType:
-        {
-            if (padding) { ConsoleView::gotoxy(22, 2); }
-            else { ConsoleView::gotoxy(21, 1); }
-            wcout << L"FILLING";
-        } break;
-
-        case HeaderTypes::SuccessfulType:
-        {
-            if (padding) { ConsoleView::gotoxy(21, 2); }
-            else { ConsoleView::gotoxy(20, 1); }
-            wcout << L"SUCCESS";
-        } break;
-
-        default:
-        {
-            if (padding) { ConsoleView::gotoxy(22, 2); }
-            else { ConsoleView::gotoxy(21, 1); }
-            wcout << L"ERROR";
-        }
+        case HeaderTypes::ErrorType: { localGoto(22, 2); wcout << L"ERROR"; } break;
+        case HeaderTypes::InputType: { localGoto(22, 2); wcout << L"WAITING"; } break;
+        case HeaderTypes::FillType: { localGoto(22, 2); wcout << L"FILLING"; } break;
+        case HeaderTypes::SuccessfulType: { localGoto(21, 2); wcout << L"SUCCESS"; } break;
+        default: { localGoto(22, 2); wcout << L"ERROR"; }
     }
 
+    int maxIterator = ConsoleView::getTerminalSize().first;
+    if (padding) { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 3); maxIterator -= (31 + 2); }
+    else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); maxIterator -= (31 + 2); }
+    
+    wstringstream stream;
+    for (int i = 0; i < maxIterator; i++) { stream << L' '; }
+    wcout << stream.str();
+
     if (padding) { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 3); }
-    else { ConsoleView::gotoxy(30, ConsoleView::getTerminalSize().second - 2); }
+    else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); }
     wcout << message;
 
     pause;
@@ -124,9 +104,6 @@ void Updater::start(Presenter& presenter)
         
     redrawThread.join();
     inputThread.join();
-
-    shared_ptr<Directory> rootDirectory = getData();
-    if (rootDirectory) { string serializedData = Serializer::serializeDirectory(rootDirectory.get()); DataSyncUseCase::setData(serializedData); }
 }
 
 void Updater::update()

@@ -1,4 +1,7 @@
 #include "directoryUseCase.h"
+#include "../TextFileUseCase/textFileUseCase.h"
+
+time_t getCurrentTimeDirectory() { auto now = system_clock::now(); return system_clock::to_time_t(now); }
 
 void DirectoryUseCase::addByParams(shared_ptr<Directory>& directory, const string& name, const FileTypes& fileType, const bool& isHidden)
 {
@@ -10,8 +13,10 @@ void DirectoryUseCase::addByParams(shared_ptr<Directory>& directory, const strin
     switch (fileType)
     {
         case FileTypes::DirectoryType: { INFO("class DirectoryUseCase -> static method add: Adding a directory;"); directory->getContents().push_back(make_shared<Directory>(name, isHidden)); } break;
+        case FileTypes::TextFileType: { INFO("class DirectoryUseCase -> static method add: Adding a text file;"); directory->getContents().push_back(make_shared<TextFile>(name, "", isHidden)); } break;
         default: { INFO("class DirectoryUseCase -> static method add: Adding a unit;"); directory->getContents().push_back(make_shared<Unit>(name, isHidden, fileType)); }
     }
+    directory->setLastEditedDate(getCurrentTimeDirectory());
 
     INFO("class DirectoryUseCase -> static method add: The operation was completed successfully!;");
 }
@@ -24,6 +29,7 @@ void DirectoryUseCase::addByUnit(shared_ptr<Directory>& directory, const shared_
     if (!unit) { ERROR("class DirectoryUseCase -> static method add: Unit pointer is null!;"); throw invalid_argument("Unit pointer is null!"); }
 
     directory->getContents().push_back(unit);
+    directory->setLastEditedDate(getCurrentTimeDirectory());
 
     INFO("class DirectoryUseCase -> static method add: The operation was completed successfully!;");
 }
