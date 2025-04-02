@@ -23,10 +23,7 @@ bool Frame::_padding;
 
 void Frame::initValues()
 {
-    ConfigParser _config(CONFIG_PATH);
-    if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
-
-    _padding = (_config.get("consolePadding") == "true") ? true : false;
+    _padding = (Updater::getConfig().get("consolePadding") == "true");
     _width = ConsoleView::getTerminalSize().first;
     _height = ConsoleView::getTerminalSize().second;
 }
@@ -83,7 +80,6 @@ wstring Frame::draw()
         << setw(bottomLeftWidth + bottomRightWidth) << TO_LEFT << endl;
 
     int bodyLines = _height - 4 - (_padding * 2);
-    int topSectionPropSplit = 0;
     int propSplit = 10;
     int mainSplit = bodyLines - 2;
 
@@ -91,23 +87,7 @@ wstring Frame::draw()
     {
         drawPaddingsX();
 
-        if (i == topSectionPropSplit)
-        {
-            int totalWidth = leftWidth + middleWidth + separatorWidth - 1;
-            int propertiesTextLength = 10;
-            int leftPadding = (totalWidth - propertiesTextLength) / 2;
-            int rightPadding = totalWidth - propertiesTextLength - leftPadding + 1;
-
-            stream
-                << VERTICAL
-                << setfill(SPACE) << setw(leftPadding + 1) << SPACE
-                << L"PROPERTIES"
-                << setfill(SPACE) << setw(rightPadding)
-                << VERTICAL
-                << setfill(SPACE) << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 2) << SPACE
-                << VERTICAL;
-        }
-        else if (i == propSplit)
+        if (i == propSplit)
         {
             stream
                 << TO_RIGHT

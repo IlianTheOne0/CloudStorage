@@ -3,7 +3,7 @@
 
 using namespace Screen;
 
-void Updater::localGoto(bool padding, int x, int y) { if (padding) { ConsoleView::gotoxy(x, y); } else { ConsoleView::gotoxy(x - 1, y - 1); } };
+void Updater::localGoto(int x, int y) { if (_padding) { ConsoleView::gotoxy(x, y); } else { ConsoleView::gotoxy(x - 1, y - 1); } };
 
 void Updater::setData(const shared_ptr<Directory>& root, bool pushToStack)
 {
@@ -21,3 +21,5 @@ shared_ptr<Directory> Updater::getParentDirectory()
 
 bool Updater::getExitFlag() { return _exitFlag.load(); }
 void Updater::setExitFlag(const bool& value) { _exitFlag = value; }
+
+const ConfigParser& Updater::getConfig() { return _config; }

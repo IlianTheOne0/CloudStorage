@@ -10,7 +10,7 @@ using std::endl;
 
 using std::string;
 
-#include "../consoleColorsEnum.h"
+#include "consoleColorsEnum.h"
 #include "loggerTypesEnum.h"
 
 #endif

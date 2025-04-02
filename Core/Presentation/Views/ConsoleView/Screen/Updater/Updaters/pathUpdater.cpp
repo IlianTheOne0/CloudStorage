@@ -3,7 +3,6 @@
 
 using namespace Screen;
 
-
 void Updater::updatePath()
 {
     if (_rootDirectory)

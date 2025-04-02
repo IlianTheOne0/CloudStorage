@@ -11,7 +11,7 @@ using namespace Screen;
 
 void drawCurrentDirectoryTree(const shared_ptr<Directory>& directory, int& x, int& y, bool consoleShowHidden)
 {
-    wstring directoryName = ConsoleView::toWString(directory->getName());
+    wstring directoryName = Tools::stringToWString(directory->getName());
 
     if (consoleShowHidden || !directory->getIsHidden())
     {
@@ -26,7 +26,7 @@ void drawCurrentDirectoryTree(const shared_ptr<Directory>& directory, int& x, in
 
             if (consoleShowHidden || !unit->getIsHidden())
             {
-                wstring unitName = ConsoleView::toWString(unit->getName());
+                wstring unitName = Tools::stringToWString(unit->getName());
                 ConsoleView::gotoxy(x, y++);
                 wcout << (last ? TREE_LAST_BRANCH : TREE_BRANCH) << unitName;
             }
@@ -36,10 +36,8 @@ void drawCurrentDirectoryTree(const shared_ptr<Directory>& directory, int& x, in
 
 wstring Tree::draw(const shared_ptr<Directory>& rootDirectory)
 {
-    ConfigParser _config(CONFIG_PATH);
-    if (!_config.load()) { cerr << "Error: Cannot load the config" << endl; return L""; }
-    bool padding = (_config.get("consolePadding") == "true");
-    bool showHidden = (_config.get("consoleShowHidden") == "true");
+    bool padding = (Updater::getConfig().get("consolePadding") == "true");
+    bool showHidden = (Updater::getConfig().get("consoleShowHidden") == "true");
 
     if (rootDirectory == nullptr)
     {

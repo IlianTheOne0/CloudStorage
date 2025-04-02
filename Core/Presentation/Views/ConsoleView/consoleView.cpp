@@ -52,26 +52,3 @@ void ConsoleView::gotoxy(int x, int y)
 
     SetConsoleCursorPosition(output, pos);
 }
-
-wstring ConsoleView::toWString(const string& str)
-{
-    size_t size;
-    mbstowcs_s(&size, nullptr, 0, str.c_str(), 0);
-    vector<wchar_t> buffer(size);
-    mbstowcs_s(&size, buffer.data(), size, str.c_str(), size - 1);
-
-    return wstring(buffer.data());
-}
-
-string ConsoleView::wstringToString(const wstring& wstr) { return string(wstr.begin(), wstr.end()); }
-
-vector<wstring> ConsoleView::split(const wstring& input, wchar_t delimiter)
-{
-    vector<wstring> tokens;
-    wstringstream stream(input);
-    wstring token;
-
-    while (getline(stream, token, delimiter)) { tokens.push_back(token); }
-
-    return tokens;
-}

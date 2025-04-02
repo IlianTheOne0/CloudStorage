@@ -11,6 +11,7 @@
 #include <chrono>
 #include <ctime>
 #include <sstream>
+#include <iomanip>
 
 using std::string;
 using std::wstring;
@@ -25,5 +26,7 @@ using std::invalid_argument;
 using std::runtime_error;
 using std::chrono::system_clock;
 using std::ostringstream;
+using std::wstringstream;
+using std::put_time;
 
 #endif

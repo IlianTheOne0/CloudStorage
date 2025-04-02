@@ -23,10 +23,6 @@ public:
 	void setTerminalProperties();
 	static pair<int, int> getTerminalSize();
 	static void gotoxy(int x, int y);
-	
-	static wstring toWString(const string& str);
-	static string wstringToString(const wstring& wstr);
-	static vector<wstring> split(const wstring& input, wchar_t delimiter);
 };
 
 #endif

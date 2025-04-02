@@ -5,5 +5,6 @@
 #include "DirectoryUseCase/directoryUseCase.h"
 #include "SerializationUseCase/serializationUseCase.h"
 #include "TextFileUseCase/textFileUseCase.h"
+#include "Tools/tools.h"
 
 #endif

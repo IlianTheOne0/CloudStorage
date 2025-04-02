@@ -19,12 +19,15 @@ namespace Screen
         static shared_ptr<Directory> _rootDirectory;
         static stack<shared_ptr<Directory>> _directoryStack;
         static wstring _path;
+        static bool _padding;
+        static ConfigParser _config;
 
-        static void localGoto(bool padding, int x, int y);
+        static void localGoto(int x, int y);
 
-        static void redrawFrame(bool padding);
-        static void updateMessage(bool padding, const HeaderTypes& title, const wstring& message);
-        static void handleInput(Presenter& presenter, bool padding);
+        static void redrawFrame();
+        static void updateText();
+        static void updateMessage(const HeaderTypes& title, const wstring& message);
+        static void handleInput(Presenter& presenter);
         static void updatePath();
     public:
         static void setData(const shared_ptr<Directory>& root, bool pushToStack = true);
@@ -36,6 +39,8 @@ namespace Screen
 
         static void start(Presenter& presenter);
         static void update();
+
+        static const ConfigParser& getConfig();
     };
 
     class Frame
@@ -85,12 +90,6 @@ namespace Screen
         
         bool edit();
         wstring getContent() const;
-    };
-
-    class ConstTextUpdater
-    {
-    public:
-        static void update();
     };
 }
 

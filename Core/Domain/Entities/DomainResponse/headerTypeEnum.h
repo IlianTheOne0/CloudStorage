@@ -7,6 +7,7 @@ enum class HeaderTypes
 	FillType,
 	SuccessfulType,
 	PropType,
+	UpdateType,
 	NoneType
 };
 

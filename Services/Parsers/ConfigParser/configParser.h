@@ -15,6 +15,8 @@ public:
 
     bool load();
     string get(const string& key) const;
+    bool set(const string& key, const string& value);
+    bool save();
 };
 
 #endif
