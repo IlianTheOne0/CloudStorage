@@ -4,9 +4,9 @@
 enum class HeaderTypes
 {
 	ErrorType,
-	InputType,
 	FillType,
 	SuccessfulType,
+	PropType,
 	NoneType
 };
 

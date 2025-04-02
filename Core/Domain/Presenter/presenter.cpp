@@ -2,18 +2,14 @@
 #include "../../../Infrastructure/Config/domainConfig.h"
 #include "../UseCases/DirectoryUseCase/directoryUseCase.h"
 
-vector<wstring> split(const wstring& input, wchar_t delimiter)
+string timeToString(const time_t& time)
 {
-    vector<wstring> tokens;
-    wstringstream stream(input);
-    wstring token;
-
-    while (getline(stream, token, delimiter)) { tokens.push_back(token); }
-
-    return tokens;
+    tm tm_struct;
+    localtime_s(&tm_struct, &time);
+    ostringstream oss;
+    oss << put_time(&tm_struct, "%Y-%m-%d %H:%M:%S");
+    return oss.str();
 }
-
-string wstringToString(const wstring& wstr) { return string(wstr.begin(), wstr.end()); }
 
 ViewModel Presenter::handle(const wstring& input)
 {
@@ -23,7 +19,7 @@ ViewModel Presenter::handle(const wstring& input)
     if (input.empty()) return { response.header, response.body };
     else
     {
-        vector<wstring> tokens = split(input, L' ');
+        vector<wstring> tokens = ConsoleView::split(input, L' ');
         ConfigParser config(CONFIG_PATH);
         config.load();
 
@@ -41,10 +37,10 @@ ViewModel Presenter::handle(const wstring& input)
             wstring dirName = isHidden ? tokens[2] : tokens[1];
 
             shared_ptr<Directory> root = Screen::Updater::getData();
-            if (any_of(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == wstringToString(dirName); }))
+            if (any_of(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == ConsoleView::wstringToString(dirName); }))
             { return { HeaderTypes::ErrorType, L"Directory exists" }; }
 
-            DirectoryUseCase::addByParams(root, wstringToString(dirName), FileTypes::DirectoryType, isHidden);
+            DirectoryUseCase::addByParams(root, ConsoleView::wstringToString(dirName), FileTypes::DirectoryType, isHidden);
             return { HeaderTypes::SuccessfulType, L"Directory created" };
         }
         else if (tokens[0] == L"notepad")
@@ -55,10 +51,10 @@ ViewModel Presenter::handle(const wstring& input)
             wstring fileName = isHidden ? tokens[2] : tokens[1];
 
             shared_ptr<Directory> root = Screen::Updater::getData();
-            if (any_of(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == wstringToString(fileName); }))
+            if (any_of(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == ConsoleView::wstringToString(fileName); }))
             { return { HeaderTypes::ErrorType, L"File exists" }; }
 
-            DirectoryUseCase::addByParams(root, wstringToString(fileName) + ".text", FileTypes::TextFileType, isHidden);
+            DirectoryUseCase::addByParams(root, ConsoleView::wstringToString(fileName) + ".text", FileTypes::TextFileType, isHidden);
             return { HeaderTypes::SuccessfulType, L"File created" };
         }
         else if (tokens[0] == L"cd")
@@ -78,7 +74,7 @@ ViewModel Presenter::handle(const wstring& input)
             auto root = Screen::Updater::getData();
             for (auto& unit : root->getContents())
             {
-                if (unit->getName() == wstringToString(tokens[1]) && unit->getFileType() == FileTypes::DirectoryType)
+                if (unit->getName() == ConsoleView::wstringToString(tokens[1]) && unit->getFileType() == FileTypes::DirectoryType)
                 {
                     if (!consoleShowHidden && unit->getIsHidden()) { return { HeaderTypes::ErrorType,  L"Directory '" + tokens[1] + L"' not found" }; }
 
@@ -94,7 +90,7 @@ ViewModel Presenter::handle(const wstring& input)
 
             wstring targetName = tokens[1];
             shared_ptr<Directory> root = Screen::Updater::getData();
-            auto it = find_if(root->getContents().begin(), root->getContents().end(), [&](auto& u) { return u->getName() == wstringToString(targetName); });
+            auto it = find_if(root->getContents().begin(), root->getContents().end(), [&](auto& u) { return u->getName() == ConsoleView::wstringToString(targetName); });
 
             if (it == root->getContents().end()) { return { HeaderTypes::ErrorType, tokens[1] + L" not found" }; }
 
@@ -103,8 +99,79 @@ ViewModel Presenter::handle(const wstring& input)
 
             if (!consoleShowHidden && unit->getIsHidden()) { return { HeaderTypes::ErrorType, tokens[1] + L" not found" }; }
 
-            DirectoryUseCase::remove(root, wstringToString(targetName));
+            DirectoryUseCase::remove(root, ConsoleView::wstringToString(targetName));
             return { HeaderTypes::SuccessfulType, tokens[1] + L" deleted" };
+        }
+        else if (tokens[0] == L"info")
+        {
+            shared_ptr<Directory> root = Screen::Updater::getData();
+            bool consoleShowHidden = (config.get("consoleShowHidden") == "true");
+
+            if (tokens.size() == 1)
+            {
+                wstring properties =
+                    L"Name: " + ConsoleView::toWString(root->getName()) + L"|" +
+                    L"Is hidden: " + (root->getIsHidden() ? L"true" : L"false") + L"|" +
+                    L"Created date: " + L"|    " + ConsoleView::toWString(timeToString(root->getCreatedDate())) + L"|" +
+                    L"Last edited date: " + L"|    " + ConsoleView::toWString(timeToString(root->getLastEditedDate())) + L"|" +
+                    L"File type: Directory";
+
+                return { HeaderTypes::PropType, properties };
+            }
+            else if (tokens.size() == 2)
+            {
+                wstring targetName = tokens[1];
+                vector<shared_ptr<Unit>>::iterator it = find_if(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == ConsoleView::wstringToString(targetName); });
+
+                if (it == root->getContents().end()) { return { HeaderTypes::ErrorType, targetName + L" not found" }; }
+
+                shared_ptr<Unit> unit = *it;
+
+                if (!consoleShowHidden && unit->getIsHidden()) { return { HeaderTypes::ErrorType, targetName + L" not found" }; }
+
+                wstring fileTypeStr;
+                switch (unit->getFileType())
+                {
+                    case FileTypes::TextFileType: { fileTypeStr = L"Text File"; } break;
+                    case FileTypes::DirectoryType: {fileTypeStr = L"Directory"; } break;
+                    default: fileTypeStr = L"Unknown"; break;
+                }
+
+                wstring properties =
+                    L"Name: " + ConsoleView::toWString(unit->getName()) + L"|" +
+                    L"Is hidden: " + (unit->getIsHidden() ? L"true" : L"false") + L"|" +
+                    L"Created date: " + L"|    " + ConsoleView::toWString(timeToString(unit->getCreatedDate())) + L"|" +
+                    L"Last edited date: " + L"|    " + ConsoleView::toWString(timeToString(unit->getLastEditedDate())) + L"|" +
+                    L"File type: " + fileTypeStr;
+
+                return { HeaderTypes::PropType, properties };
+            }
+
+            return result;
+        }
+        else if (tokens[0] == L"open")
+        {
+            if (tokens.size() < 2) { return result; }
+
+            wstring targetName = tokens[1];
+            shared_ptr<Directory> root = Screen::Updater::getData();
+            vector<shared_ptr<Unit>>::iterator it = find_if(root->getContents().begin(), root->getContents().end(), [&](shared_ptr<Unit>& unit) { return unit->getName() == ConsoleView::wstringToString(targetName); });
+
+            if (it == root->getContents().end()) { return { HeaderTypes::ErrorType, tokens[1] + L" not found" }; }
+
+            shared_ptr<Unit> unit = *it;
+            bool consoleShowHidden = (config.get("consoleShowHidden") == "true");
+
+            if (!consoleShowHidden && unit->getIsHidden()) { return { HeaderTypes::ErrorType, tokens[1] + L" not found" }; }
+            if (unit->getFileType() != FileTypes::TextFileType) { return { HeaderTypes::ErrorType, L"Can only open text files" }; }
+
+            shared_ptr<AFile> file = dynamic_pointer_cast<AFile>(unit);
+            wstring fileNameW = ConsoleView::toWString(file->getName());
+            wstring contentW = ConsoleView::toWString(file->getContent());
+            if (contentW.empty()) contentW = L" ";
+            wstring message = fileNameW + L"|" + contentW;
+
+            return { HeaderTypes::FillType, message };
         }
     }
 

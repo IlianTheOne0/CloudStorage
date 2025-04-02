@@ -140,8 +140,15 @@
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Clock\clock.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Frame\frame.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\InputHandler\inputHandler.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\textEditor\textEditor.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Tree\tree.cpp" />
-    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\updater.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\Updaters\constTextUpdater.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\Updaters\mainUpdaters.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\Updaters\messageUpdater.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\definesUpdater.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\privateMethodsUpdater.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\Updaters\pathUpdater.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\Updaters\updaterFrame.cpp" />
     <ClCompile Include="Services\Encryption\Base\AEncryption.cpp" />
     <ClCompile Include="Services\Encryption\Decryptor\decryptor.cpp" />
     <ClCompile Include="Services\Encryption\EncryptionStruct\encryptionStruct.cpp" />

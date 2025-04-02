@@ -10,6 +10,7 @@
 #include <exception>
 #include <chrono>
 #include <ctime>
+#include <sstream>
 
 using std::string;
 using std::wstring;
@@ -23,5 +24,6 @@ using std::exception;
 using std::invalid_argument;
 using std::runtime_error;
 using std::chrono::system_clock;
+using std::ostringstream;
 
 #endif

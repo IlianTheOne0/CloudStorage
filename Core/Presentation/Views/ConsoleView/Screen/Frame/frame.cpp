@@ -65,24 +65,25 @@ wstring Frame::draw()
     stream
         << LEFT_TOP
         << setfill(HORIZONTAL) << setw(leftWidth) << TO_BOTTOM
-        << setw(middleWidth + 1) << TO_BOTTOM
-        << setw(rightWidth) << RIGHT_TOP << endl;
+        << setw(middleWidth + 2) << TO_BOTTOM
+        << setw(rightWidth - 1) << RIGHT_TOP << endl;
 
     drawPaddingsX();
     stream
         << VERTICAL << setfill(SPACE)
         << setw(leftWidth - 1) << SPACE << VERTICAL
-        << setw(middleWidth) << SPACE << VERTICAL
-        << setw(rightWidth - 1) << SPACE << VERTICAL << endl;
+        << setw(middleWidth + 1) << SPACE << VERTICAL
+        << setw(rightWidth - 2) << SPACE << VERTICAL << endl;
 
     drawPaddingsX();
     stream
         << TO_RIGHT << setfill(HORIZONTAL)
         << setw(leftWidth) << TO_TOP
-        << setw(middleWidth + 1) << CROSS
-        << setw(bottomLeftWidth + bottomRightWidth + 1) << TO_LEFT << endl;
+        << setw(middleWidth + 2) << CROSS
+        << setw(bottomLeftWidth + bottomRightWidth) << TO_LEFT << endl;
 
     int bodyLines = _height - 4 - (_padding * 2);
+    int topSectionPropSplit = 0;
     int propSplit = 10;
     int mainSplit = bodyLines - 2;
 
@@ -90,31 +91,47 @@ wstring Frame::draw()
     {
         drawPaddingsX();
 
-        if (i == propSplit)
+        if (i == topSectionPropSplit)
+        {
+            int totalWidth = leftWidth + middleWidth + separatorWidth - 1;
+            int propertiesTextLength = 10;
+            int leftPadding = (totalWidth - propertiesTextLength) / 2;
+            int rightPadding = totalWidth - propertiesTextLength - leftPadding + 1;
+
+            stream
+                << VERTICAL
+                << setfill(SPACE) << setw(leftPadding + 1) << SPACE
+                << L"PROPERTIES"
+                << setfill(SPACE) << setw(rightPadding)
+                << VERTICAL
+                << setfill(SPACE) << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 2) << SPACE
+                << VERTICAL;
+        }
+        else if (i == propSplit)
         {
             stream
                 << TO_RIGHT
-                << setfill(HORIZONTAL) << setw(leftWidth + middleWidth + separatorWidth - 1) << HORIZONTAL
+                << setfill(HORIZONTAL) << setw(leftWidth + middleWidth + separatorWidth) << HORIZONTAL
                 << TO_LEFT
-                << setfill(SPACE) << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 1) << SPACE
+                << setfill(SPACE) << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 2) << SPACE
                 << VERTICAL;
         }
         else if (i == mainSplit)
         {
             stream
                 << VERTICAL << setfill(SPACE)
-                << setw(leftWidth + middleWidth + separatorWidth - 1) << SPACE
+                << setw(leftWidth + middleWidth + separatorWidth) << SPACE
                 << TO_RIGHT
-                << setfill(HORIZONTAL) << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 1) << HORIZONTAL
+                << setfill(HORIZONTAL) << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 2) << HORIZONTAL
                 << TO_LEFT;
         }
         else
         {
             stream
                 << VERTICAL << setfill(SPACE)
-                << setw(leftWidth + middleWidth + separatorWidth - 1) << SPACE
+                << setw(leftWidth + middleWidth + separatorWidth) << SPACE
                 << VERTICAL
-                << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 1) << SPACE
+                << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 2) << SPACE
                 << VERTICAL;
         }
         stream << endl;
@@ -123,8 +140,8 @@ wstring Frame::draw()
     drawPaddingsX();
     stream
         << LEFT_BOTTOM << setfill(HORIZONTAL)
-        << setw(leftWidth + middleWidth + separatorWidth) << TO_TOP
-        << setw(bottomLeftWidth + bottomRightWidth + separatorWidth) << RIGHT_BOTTOM;
+        << setw(leftWidth + middleWidth + separatorWidth + 1) << TO_TOP
+        << setw(bottomLeftWidth + bottomRightWidth + separatorWidth - 1) << RIGHT_BOTTOM;
 
     return stream.str();
 }

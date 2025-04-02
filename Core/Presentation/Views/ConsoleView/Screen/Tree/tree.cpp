@@ -9,19 +9,9 @@ using namespace Screen;
 #define TREE_VERTICAL L"\u2502   "
 #define TREE_INDENT L"    "
 
-wstring toWString(const string& str)
-{
-    size_t size;
-    mbstowcs_s(&size, nullptr, 0, str.c_str(), 0);
-    vector<wchar_t> buffer(size);
-    mbstowcs_s(&size, buffer.data(), size, str.c_str(), size - 1);
-
-    return wstring(buffer.data());
-}
-
 void drawCurrentDirectoryTree(const shared_ptr<Directory>& directory, int& x, int& y, bool consoleShowHidden)
 {
-    wstring directoryName = toWString(directory->getName());
+    wstring directoryName = ConsoleView::toWString(directory->getName());
 
     if (consoleShowHidden || !directory->getIsHidden())
     {
@@ -36,7 +26,7 @@ void drawCurrentDirectoryTree(const shared_ptr<Directory>& directory, int& x, in
 
             if (consoleShowHidden || !unit->getIsHidden())
             {
-                wstring unitName = toWString(unit->getName());
+                wstring unitName = ConsoleView::toWString(unit->getName());
                 ConsoleView::gotoxy(x, y++);
                 wcout << (last ? TREE_LAST_BRANCH : TREE_BRANCH) << unitName;
             }
@@ -59,7 +49,7 @@ wstring Tree::draw(const shared_ptr<Directory>& rootDirectory)
 
         return L"";
     }
-    int x = 31, y = (padding) ? 4 : 3;
+    int x = 32, y = (padding) ? 4 : 3;
 
     wstringstream stream;
 

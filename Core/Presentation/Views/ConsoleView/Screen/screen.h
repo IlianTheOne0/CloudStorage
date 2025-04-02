@@ -4,6 +4,9 @@
 #include "../../../../Domain/domain.h"
 #include "../../../../../Infrastructure/Config/presentationConfig.h"
 
+#define WAITING_WSTR L"WAITING"
+#define UODATE_DELEY 60
+
 class Presenter;
 namespace Screen
 {
@@ -16,6 +19,8 @@ namespace Screen
         static shared_ptr<Directory> _rootDirectory;
         static stack<shared_ptr<Directory>> _directoryStack;
         static wstring _path;
+
+        static void localGoto(bool padding, int x, int y);
 
         static void redrawFrame(bool padding);
         static void updateMessage(bool padding, const HeaderTypes& title, const wstring& message);
@@ -61,6 +66,31 @@ namespace Screen
     {
     public:
         static wstring draw(const shared_ptr<Directory>& rootDirectory);
+    };
+
+    class TextEditor
+    {
+    private:
+        wstring _name;
+        wstring _content;
+        int _cursorX;
+        int _cursorY;
+        int _scrollOffset;
+
+        void display();
+        void processKeyPress(int key);
+        void showCursor(bool visible);
+    public:
+        TextEditor(const wstring& filename, const wstring& content);
+        
+        bool edit();
+        wstring getContent() const;
+    };
+
+    class ConstTextUpdater
+    {
+    public:
+        static void update();
     };
 }
 

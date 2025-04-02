@@ -42,5 +42,7 @@ using std::atomic;
 using std::unique_lock;
 using std::stack;
 using std::any_of;
+using std::min;
+using std::max;
 
 #endif
