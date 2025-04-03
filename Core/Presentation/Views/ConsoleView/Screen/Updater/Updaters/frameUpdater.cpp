@@ -27,6 +27,6 @@ void Updater::redrawFrame()
         else { ConsoleView::gotoxy(31, ConsoleView::getTerminalSize().second - 2); }
         if (_exitFlag) break;
 
-        sleep_for(seconds(UODATE_DELEY));
+        sleep_for(seconds(UPDATE_DELEY));
     }
 }

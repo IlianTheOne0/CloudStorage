@@ -5,7 +5,7 @@
 #include "../../../../../Infrastructure/Config/presentationConfig.h"
 
 #define WAITING_WSTR L"WAITING"
-#define UODATE_DELEY 60
+#define UPDATE_DELEY 60
 
 class Presenter;
 namespace Screen

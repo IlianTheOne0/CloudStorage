@@ -22,25 +22,23 @@ void Updater::start(Presenter& presenter)
 
 void Updater::update()
 {
-    if (!_exitFlag)
-    {
-        if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
-        _padding = (_config.get("consolePadding") == "true");
+    if (_exitFlag) { mclear; return; }
 
-        mclear;
-        wcout << Frame::draw();
-        wcout << Tree::draw(_rootDirectory);
+    if (!_config.load()) { throw runtime_error("class ConsoleView <- constructor: Cannot load the config"); }
+    _padding = (_config.get("consolePadding") == "true");
 
-        localGoto(6, 2);
-        wcout << Clock::getCurrentDateTime();
+    mclear;
+    wcout << Frame::draw();
+    wcout << Tree::draw(_rootDirectory);
 
-        localGoto(32, 2);
-        Updater::updatePath(); wcout << _path;
+    localGoto(3, 2);
+    wcout << Clock::getCurrentDateTime();
 
-        localGoto(22, 2);
-        wcout << WAITING_WSTR;
+    localGoto(32, 2);
+    Updater::updatePath(); wcout << _path;
 
-        Updater::updateText();
-    }
-    else { mclear; }
+    localGoto(22, 2);
+    wcout << WAITING_WSTR;
+
+    Updater::updateText();
 }

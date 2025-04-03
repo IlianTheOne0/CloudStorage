@@ -4,7 +4,8 @@
 
 bool DataSyncUseCase::synkFromRemote()
 {
-	try {
+	try
+    {
 		LocalProvider local;
 		RemoteProvider remote;
 
@@ -17,7 +18,8 @@ bool DataSyncUseCase::synkFromRemote()
 
 bool DataSyncUseCase::synkFromLocal()
 {
-	try {
+	try
+    {
 		LocalProvider local;
 		RemoteProvider remote;
 
@@ -28,8 +30,10 @@ bool DataSyncUseCase::synkFromLocal()
 	return true;
 }
 
-bool DataSyncUseCase::setData(const string& serialized) {
-    try {
+bool DataSyncUseCase::setData(const string& serialized)
+{
+    try
+    {
         string password = KeyRandomizer::generateRandomKey();
         Encryptor encryptor;
         EncryptionData encryptedData = encryptor.encrypt(serialized, password);
@@ -51,15 +55,17 @@ bool DataSyncUseCase::setData(const string& serialized) {
     return true;
 }
 
-string DataSyncUseCase::getData() {
+string DataSyncUseCase::getData()
+{
     LocalProvider local;
     string decryptedData;
 
-    try {
+    try
+    {
         string data = local.load();
 
         if (data.empty() || data.size() <= 2) { return ""; }
-        if (data.size() < 256 * 2 + 512) { ("class DataSyncUseCase -> static method synkFromRemote: invalid line length! (" + to_string(data.size()) + ");"); throw invalid_argument("invalid line length! (" + to_string(data.size()) + ")"); }
+        if (data.size() < 256 * 2 + 512) { ERROR("class DataSyncUseCase -> static method synkFromRemote: invalid line length! (" + to_string(data.size()) + ");"); throw invalid_argument("invalid line length! (" + to_string(data.size()) + ")"); }
 
         size_t pos = 0; string sbox_part = data.substr(pos, 256);
         pos += 256; string invertedSBox_part = data.substr(pos, 256);

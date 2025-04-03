@@ -154,7 +154,7 @@
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Clock\clock.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Frame\frame.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\InputHandler\inputHandler.cpp" />
-    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\textEditor\textEditor.cpp" />
+    <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\TextEditor\textEditor.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Tree\tree.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\Updaters\constTextUpdater.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\Screen\Updater\Updaters\mainUpdaters.cpp" />

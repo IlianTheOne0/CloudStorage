@@ -5,7 +5,7 @@ EncryptionData Decryptor::encrypt(const string& data, const string& password) { 
 string Decryptor::decrypt(const EncryptionData& encryptedData, const string& password)
 {
     const string& data = encryptedData.getData();
-    if (data.size() <= SALT_SIZE) return "";
+    if (data.size() <= SALT_SIZE) { return ""; }
 
     vector<unsigned char> salt(data.begin(), data.begin() + SALT_SIZE);
     vector<unsigned char> result(data.begin() + SALT_SIZE, data.end());
