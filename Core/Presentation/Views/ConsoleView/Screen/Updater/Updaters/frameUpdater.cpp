@@ -11,7 +11,7 @@ void Updater::redrawFrame()
         mclear;
         wcout << Frame::draw();
 
-        localGoto(6, 2);
+        localGoto(3, 2);
         wcout << Clock::getCurrentDateTime();
         wcout << Tree::draw(_rootDirectory);
 

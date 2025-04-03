@@ -147,7 +147,7 @@
     <ClCompile Include="Core\Domain\Presenter\presenter.cpp" />
     <ClCompile Include="Core\Domain\UseCases\Tools\ToolsImplemention\stringToWString.cpp" />
     <ClCompile Include="Core\Domain\UseCases\Tools\ToolsImplemention\wstringToString.cpp" />
-    <ClCompile Include="Core\Domain\UseCases\DataSyncUseCase\DataSyncUseCase.cpp" />
+    <ClCompile Include="Core\Domain\UseCases\DataSyncUseCase\dataSyncUseCase.cpp" />
     <ClCompile Include="Core\Domain\UseCases\SerializationUseCase\Serialization\serialization.cpp" />
     <ClCompile Include="Core\Domain\UseCases\SerializationUseCase\ValueParser\valueParser.cpp" />
     <ClCompile Include="Core\Presentation\Views\ConsoleView\consoleView.cpp" />
@@ -202,7 +202,7 @@
     <ClInclude Include="Core\Data\Providers\providers.h" />
     <ClInclude Include="Core\Data\Providers\RemoteProvider\remoteProvider.h" />
     <ClInclude Include="Core\Domain\Entities\File\file.h" />
-    <ClInclude Include="Core\Domain\UseCases\DataSyncUseCase\DataSyncUseCase.h" />
+    <ClInclude Include="Core\Domain\UseCases\DataSyncUseCase\dataSyncUseCase.h" />
     <ClInclude Include="Core\Domain\UseCases\SerializationUseCase\serializationUseCase.h" />
     <ClInclude Include="Core\Domain\UseCases\SerializationUseCase\Serialization\serialization.h" />
     <ClInclude Include="Core\Domain\UseCases\SerializationUseCase\ValueParser\valueParser.h" />

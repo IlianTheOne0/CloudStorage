@@ -11,7 +11,7 @@ wstring Clock::getCurrentDateTime()
     localtime_s(&local_time, &now_time);
 
     wstringstream stream;
-    stream << put_time(&local_time, L"%Y-%m-%d");
+    stream << put_time(&local_time, L"%Y-%m-%d %H:%M");
     
     return stream.str();
 }
